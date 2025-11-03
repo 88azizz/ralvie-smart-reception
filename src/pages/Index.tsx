@@ -4,6 +4,9 @@ import { Features } from "@/components/Features";
 import { Demo } from "@/components/Demo";
 import { HowItWorks } from "@/components/HowItWorks";
 import { UseCases } from "@/components/UseCases";
+import { Comparison } from "@/components/Comparison";
+import { ROICalculator } from "@/components/ROICalculator";
+import { Pricing } from "@/components/Pricing";
 import { SocialProof } from "@/components/SocialProof";
 import { CTA } from "@/components/CTA";
 import { FAQ } from "@/components/FAQ";
@@ -22,6 +25,9 @@ const Index = () => {
       <div id="industries">
         <UseCases />
       </div>
+      <Comparison />
+      <ROICalculator />
+      <Pricing />
       <div id="testimonials">
         <SocialProof />
       </div>
