@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import ralvieLogo from "@/assets/ralvie-logo.svg";
+import ralvieLogo from "@/assets/ralvie-logo-white.png";
 
 export const Navigation = () => {
   const openCalendly = (e: React.MouseEvent) => {

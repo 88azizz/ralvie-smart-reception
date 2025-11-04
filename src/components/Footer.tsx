@@ -1,4 +1,5 @@
 import { Phone, Mail, MapPin } from "lucide-react";
+import ralvieLogo from "@/assets/ralvie-logo-white.png";
 
 export const Footer = () => {
   return (
@@ -7,11 +8,8 @@ export const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           {/* Brand */}
           <div>
-            <div className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
-                <Phone className="w-5 h-5 text-background" />
-              </div>
-              <span className="text-xl font-bold text-foreground">Ralvie</span>
+            <div className="mb-4">
+              <img src={ralvieLogo} alt="Ralvie AI" className="h-10" />
             </div>
             <p className="text-muted-foreground text-sm">
               AI-powered frontdesk that speaks like a human, works like AI.
