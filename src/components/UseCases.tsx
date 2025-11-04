@@ -1,6 +1,7 @@
 import { Card } from "@/components/ui/card";
 import { Hotel, GraduationCap, Stethoscope, Building2, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 import hospitalityImg from "@/assets/hospitality.jpg";
 import healthcareImg from "@/assets/healthcare.jpg";
 import realestateImg from "@/assets/realestate.jpg";
@@ -14,6 +15,7 @@ const useCases = [
     metrics: "+35% booking rate",
     features: ["Room availability checks", "Reservation management", "Guest service requests", "Upsell opportunities"],
     image: hospitalityImg,
+    link: "/case-studies/hospitality"
   },
   {
     icon: Stethoscope,
@@ -22,6 +24,7 @@ const useCases = [
     metrics: "-60% wait times",
     features: ["Appointment scheduling", "Prescription refills", "Patient inquiries", "Emergency routing"],
     image: healthcareImg,
+    link: "/case-studies/healthcare"
   },
   {
     icon: Building2,
@@ -30,6 +33,7 @@ const useCases = [
     metrics: "+42% lead capture",
     features: ["Property inquiries", "Viewing bookings", "Lead qualification", "Market information"],
     image: realestateImg,
+    link: "/case-studies/real-estate"
   },
   {
     icon: GraduationCap,
@@ -38,6 +42,7 @@ const useCases = [
     metrics: "90% faster response",
     features: ["Admissions support", "Tour scheduling", "Course information", "Parent inquiries"],
     image: educationImg,
+    link: "/case-studies/education"
   },
 ];
 
@@ -126,9 +131,12 @@ export const UseCases = () => {
                   <Button 
                     variant="ghost" 
                     className="w-full mt-4 group/btn hover:bg-primary/10 hover:text-primary transition-all duration-300"
+                    asChild
                   >
-                    Learn More
-                    <ArrowRight className="ml-2 w-4 h-4 group-hover/btn:translate-x-1 transition-transform duration-300" />
+                    <Link to={useCase.link}>
+                      Learn More
+                      <ArrowRight className="ml-2 w-4 h-4 group-hover/btn:translate-x-1 transition-transform duration-300" />
+                    </Link>
                   </Button>
                 </div>
               </Card>

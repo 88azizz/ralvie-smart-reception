@@ -42,17 +42,13 @@ export const Footer = () => {
           <div>
             <h3 className="font-semibold text-foreground mb-4">Contact</h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
-              <li className="flex items-center gap-2">
-                <Mail className="w-4 h-4" />
-                <span>hello@ralvie.ai</span>
+              <li className="flex items-start gap-2">
+                <Mail className="w-4 h-4 mt-1 flex-shrink-0" />
+                <span>support@ralvie.ai</span>
               </li>
-              <li className="flex items-center gap-2">
-                <Phone className="w-4 h-4" />
-                <span>1-800-RALVIE-1</span>
-              </li>
-              <li className="flex items-center gap-2">
-                <MapPin className="w-4 h-4" />
-                <span>San Francisco, CA</span>
+              <li className="flex items-start gap-2">
+                <MapPin className="w-4 h-4 mt-1 flex-shrink-0" />
+                <span>Ralvie AI Inc, 120 East Beaver Creek Rd Suite 200, Richmond Hill, ON L4B 4V1, Canada</span>
               </li>
             </ul>
           </div>

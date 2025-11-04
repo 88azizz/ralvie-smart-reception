@@ -94,7 +94,13 @@ export const Hero = () => {
             </div>
 
             {/* Trust indicators with check marks */}
-            <div className="flex flex-wrap justify-center lg:justify-start gap-6 text-sm text-muted-foreground pt-4 animate-fade-in" style={{ animationDelay: '500ms' }}>
+            <div className="flex flex-wrap justify-center lg:justify-start gap-6 text-sm pt-4 animate-fade-in" style={{ animationDelay: '500ms' }}>
+              <span className="flex items-center gap-2 hover:text-primary transition-colors duration-200 font-semibold text-accent">
+                <div className="w-5 h-5 rounded-full bg-accent/30 flex items-center justify-center">
+                  ✓
+                </div>
+                14-day free trial
+              </span>
               <span className="flex items-center gap-2 hover:text-primary transition-colors duration-200">
                 <div className="w-5 h-5 rounded-full bg-primary/20 flex items-center justify-center">
                   ✓
@@ -106,12 +112,6 @@ export const Hero = () => {
                   ✓
                 </div>
                 Free setup
-              </span>
-              <span className="flex items-center gap-2 hover:text-primary transition-colors duration-200">
-                <div className="w-5 h-5 rounded-full bg-primary/20 flex items-center justify-center">
-                  ✓
-                </div>
-                60s to start
               </span>
             </div>
           </div>
