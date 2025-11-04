@@ -1,21 +1,19 @@
 import { Button } from "@/components/ui/button";
 import ralvieLogo from "@/assets/ralvie-logo.svg";
 
-declare global {
-  interface Window {
-    Calendly?: {
-      initPopupWidget: (options: { url: string }) => void;
-    };
-  }
-}
-
 export const Navigation = () => {
-  const openCalendly = () => {
-    if (window.Calendly) {
+  const openCalendly = (e: React.MouseEvent) => {
+    e.preventDefault();
+    // @ts-ignore - Calendly is loaded via external script
+    if (typeof window !== 'undefined' && window.Calendly) {
+      // @ts-ignore
       window.Calendly.initPopupWidget({ 
         url: 'https://calendly.com/ralvie-ai/30min?hide_event_type_details=1&hide_gdpr_banner=1' 
       });
+    } else {
+      console.error('Calendly is not loaded yet');
     }
+    return false;
   };
 
   return (

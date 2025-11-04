@@ -3,21 +3,17 @@ import { Badge } from "@/components/ui/badge";
 import { Phone, Clock, TrendingUp, Sparkles } from "lucide-react";
 import heroImage from "@/assets/hero-image.jpg";
 
-declare global {
-  interface Window {
-    Calendly?: {
-      initPopupWidget: (options: { url: string }) => void;
-    };
-  }
-}
-
 export const Hero = () => {
-  const openCalendly = () => {
-    if (window.Calendly) {
+  const openCalendly = (e: React.MouseEvent) => {
+    e.preventDefault();
+    // @ts-ignore - Calendly is loaded via external script
+    if (typeof window !== 'undefined' && window.Calendly) {
+      // @ts-ignore
       window.Calendly.initPopupWidget({ 
         url: 'https://calendly.com/ralvie-ai/30min?hide_event_type_details=1&hide_gdpr_banner=1' 
       });
     }
+    return false;
   };
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">

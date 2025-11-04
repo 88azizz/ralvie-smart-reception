@@ -2,28 +2,24 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Check } from "lucide-react";
 
-declare global {
-  interface Window {
-    Calendly?: {
-      initPopupWidget: (options: { url: string }) => void;
-    };
-  }
-}
-
 const benefits = [
   "Free setup & configuration",
   "No credit card required",
-  "60 seconds to get started",
+  "14-day free trial",
   "Cancel anytime, no questions asked",
 ];
 
 export const CTA = () => {
-  const openCalendly = () => {
-    if (window.Calendly) {
+  const openCalendly = (e: React.MouseEvent) => {
+    e.preventDefault();
+    // @ts-ignore - Calendly is loaded via external script
+    if (typeof window !== 'undefined' && window.Calendly) {
+      // @ts-ignore
       window.Calendly.initPopupWidget({ 
         url: 'https://calendly.com/ralvie-ai/30min?hide_event_type_details=1&hide_gdpr_banner=1' 
       });
     }
+    return false;
   };
   return (
     <section className="py-24 px-4">
