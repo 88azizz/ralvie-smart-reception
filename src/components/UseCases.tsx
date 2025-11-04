@@ -42,6 +42,18 @@ const useCases = [
 ];
 
 export const UseCases = () => {
+  const openCalendly = (e: React.MouseEvent) => {
+    e.preventDefault();
+    // @ts-ignore - Calendly is loaded via external script
+    if (typeof window !== 'undefined' && window.Calendly) {
+      // @ts-ignore
+      window.Calendly.initPopupWidget({ 
+        url: 'https://calendly.com/ralvie-ai/30min?hide_event_type_details=1&hide_gdpr_banner=1' 
+      });
+    }
+    return false;
+  };
+
   return (
     <section className="py-24 px-4 bg-gradient-to-b from-card/30 to-background relative overflow-hidden">
       {/* Background decoration */}
@@ -132,9 +144,13 @@ export const UseCases = () => {
           <Button 
             size="lg"
             className="bg-accent hover:bg-accent/90 text-accent-foreground shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+            onClick={openCalendly}
           >
             Discuss Your Use Case
           </Button>
+          <p className="text-sm text-muted-foreground mt-4">
+            14-day free trial • No credit card required
+          </p>
         </div>
       </div>
     </section>

@@ -7,6 +7,17 @@ import { useState } from "react";
 import roiGraphic from "@/assets/roi-graphic.jpg";
 
 export const ROICalculator = () => {
+  const openCalendly = (e: React.MouseEvent) => {
+    e.preventDefault();
+    // @ts-ignore - Calendly is loaded via external script
+    if (typeof window !== 'undefined' && window.Calendly) {
+      // @ts-ignore
+      window.Calendly.initPopupWidget({ 
+        url: 'https://calendly.com/ralvie-ai/30min?hide_event_type_details=1&hide_gdpr_banner=1' 
+      });
+    }
+    return false;
+  };
   const [calls, setCalls] = useState(500);
   const [avgCallTime, setAvgCallTime] = useState(5);
   const [hourlyRate, setHourlyRate] = useState(25);
@@ -195,11 +206,12 @@ export const ROICalculator = () => {
             <Button 
               size="lg" 
               className="w-full bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+              onClick={openCalendly}
             >
               Start Saving Today - Free Setup
             </Button>
             <p className="text-center text-sm text-muted-foreground">
-              Join 2,500+ businesses already saving with Ralvie
+              14-day free trial • No credit card required • Join 2,500+ businesses saving with Ralvie
             </p>
           </div>
         </div>
