@@ -2,6 +2,14 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Check } from "lucide-react";
 
+declare global {
+  interface Window {
+    Calendly?: {
+      initPopupWidget: (options: { url: string }) => void;
+    };
+  }
+}
+
 const benefits = [
   "Free setup & configuration",
   "No credit card required",
@@ -10,6 +18,13 @@ const benefits = [
 ];
 
 export const CTA = () => {
+  const openCalendly = () => {
+    if (window.Calendly) {
+      window.Calendly.initPopupWidget({ 
+        url: 'https://calendly.com/ralvie-ai/30min?hide_event_type_details=1&hide_gdpr_banner=1' 
+      });
+    }
+  };
   return (
     <section className="py-24 px-4">
       <div className="container mx-auto max-w-4xl">
@@ -37,6 +52,7 @@ export const CTA = () => {
                 size="lg" 
                 variant="outline"
                 className="border-primary/50 text-foreground hover:bg-primary/10 text-lg px-8 py-6"
+                onClick={openCalendly}
               >
                 Schedule a Demo
               </Button>

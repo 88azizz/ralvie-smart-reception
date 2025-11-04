@@ -3,7 +3,22 @@ import { Badge } from "@/components/ui/badge";
 import { Phone, Clock, TrendingUp, Sparkles } from "lucide-react";
 import heroImage from "@/assets/hero-image.jpg";
 
+declare global {
+  interface Window {
+    Calendly?: {
+      initPopupWidget: (options: { url: string }) => void;
+    };
+  }
+}
+
 export const Hero = () => {
+  const openCalendly = () => {
+    if (window.Calendly) {
+      window.Calendly.initPopupWidget({ 
+        url: 'https://calendly.com/ralvie-ai/30min?hide_event_type_details=1&hide_gdpr_banner=1' 
+      });
+    }
+  };
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Animated gradient background */}
@@ -76,6 +91,7 @@ export const Hero = () => {
                 size="lg" 
                 variant="outline"
                 className="border-primary/50 text-foreground hover:bg-primary/10 hover:border-primary text-lg px-8 py-6 hover:scale-105 transition-all duration-300"
+                onClick={openCalendly}
               >
                 Book a Demo
               </Button>

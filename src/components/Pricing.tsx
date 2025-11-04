@@ -5,53 +5,77 @@ import { Check, Sparkles, Building2, Rocket } from "lucide-react";
 export const Pricing = () => {
   const plans = [
     {
+      name: "Solopreneur",
+      icon: Sparkles,
+      price: "39",
+      description: "Perfect for freelancers and solo businesses.",
+      features: [
+        "150 voice minutes",
+        "150 SMS messages",
+        "100+ premium voices included",
+        "Multilingual support",
+        "Basic call routing",
+        "Standard analytics"
+      ],
+      highlighted: false
+    },
+    {
       name: "Starter",
       icon: Sparkles,
-      price: "299",
-      description: "Perfect for small businesses getting started",
+      price: "99",
+      description: "For growing businesses ready to automate more.",
       features: [
-        "Up to 500 calls/month",
-        "24/7 AI receptionist",
-        "Basic integrations",
-        "Email support",
-        "Call recordings",
-        "Basic analytics"
+        "150 voice minutes",
+        "150 SMS messages",
+        "Call transcription & summaries",
+        "6,000+ integrations",
+        "Up to 5 workflow automations",
+        "CRM integrations + API access"
       ],
       highlighted: false
     },
     {
       name: "Professional",
       icon: Building2,
-      price: "599",
-      description: "Ideal for growing businesses",
+      price: "299",
+      description: "Ideal for teams handling higher call volumes.",
       features: [
-        "Up to 2,000 calls/month",
-        "24/7 AI receptionist",
-        "Advanced integrations",
-        "Priority support",
-        "Call recordings & transcripts",
-        "Advanced analytics",
-        "Custom voice options",
-        "Multi-location support"
+        "1,000 voice minutes",
+        "1,000 SMS messages",
+        "Advanced analytics & reporting",
+        "Workflow automation (unlimited)",
+        "Priority support (chat + email)",
+        "Call whispering/monitoring"
       ],
       highlighted: true
     },
     {
+      name: "Business",
+      icon: Building2,
+      price: "599",
+      description: "For businesses that need scale and reliability.",
+      features: [
+        "2,500 voice minutes",
+        "2,500 SMS messages",
+        "Extended data retention (12 months)",
+        "Slack/Teams support",
+        "Workflow & automation at scale",
+        "Priority support"
+      ],
+      highlighted: false
+    },
+    {
       name: "Enterprise",
       icon: Rocket,
-      price: "Custom",
-      description: "For large organizations with custom needs",
+      price: "999",
+      description: "For enterprises needing customization & compliance.",
       features: [
-        "Unlimited calls",
-        "24/7 AI receptionist",
-        "Custom integrations",
-        "Dedicated account manager",
-        "Call recordings & transcripts",
-        "Advanced analytics & reporting",
-        "Custom voice & personality",
-        "Multi-location support",
-        "SLA guarantee",
-        "White-label options"
+        "5,000 voice minutes",
+        "5,000 SMS messages",
+        "HIPAA, SOC2, GDPR compliance",
+        "Dedicated support representative",
+        "Custom integrations & APIs",
+        "Custom SLAs with guaranteed uptime"
       ],
       highlighted: false
     }
@@ -77,7 +101,7 @@ export const Pricing = () => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-3 lg:grid-cols-5 gap-8">
           {plans.map((plan, index) => {
             const Icon = plan.icon;
             return (
@@ -138,7 +162,7 @@ export const Pricing = () => {
                   } transition-all duration-300 hover:scale-105`}
                   size="lg"
                 >
-                  {plan.price === "Custom" ? "Contact Sales" : "Start Free Trial"}
+                  Start Free Trial
                 </Button>
               </Card>
             );
