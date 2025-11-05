@@ -79,9 +79,12 @@ export const Hero = () => {
               <Button 
                 size="lg" 
                 className="bg-accent hover:bg-accent/90 text-accent-foreground shadow-lg hover:shadow-2xl hover:shadow-accent/50 transition-all duration-300 text-lg px-8 py-6 hover:scale-105 group"
+                asChild
               >
-                Start Free Trial
-                <Sparkles className="ml-2 w-4 h-4 group-hover:rotate-12 transition-transform duration-300" />
+                <a href="https://app.frontdesk.ralvie.ai/client-trial?_gl=1*1jjx8y8*_ga*NDEwMDkzNDE2LjE3NTE5NTkwOTQ.*_ga_71TD7P1FL4*czE3NjIzMTY5ODYkbzExNyRnMSR0MTc2MjMxNzI3MiRqNTkkbDAkaDA." target="_blank" rel="noopener noreferrer">
+                  Start Free Trial
+                  <Sparkles className="ml-2 w-4 h-4 group-hover:rotate-12 transition-transform duration-300" />
+                </a>
               </Button>
               <Button 
                 size="lg" 

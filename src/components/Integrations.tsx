@@ -7,55 +7,64 @@ const integrations = [
     icon: Calendar,
     name: "Calendly",
     description: "Automated scheduling and bookings",
-    category: "Scheduling"
+    category: "Scheduling",
+    logo: "https://asset.brandfetch.io/idSUrLOILs/idV22YdKgU.svg"
   },
   {
     icon: Calendar,
     name: "Cal.com",
     description: "Open-source scheduling platform",
-    category: "Scheduling"
+    category: "Scheduling",
+    logo: "https://cal.com/logo.svg"
   },
   {
     icon: Phone,
     name: "Twilio",
     description: "Voice and SMS communications",
-    category: "Communications"
+    category: "Communications",
+    logo: "https://www.svgrepo.com/show/354464/twilio.svg"
   },
   {
     icon: Zap,
     name: "Zapier",
     description: "Connect 6,000+ apps and automate workflows",
-    category: "Automation"
+    category: "Automation",
+    logo: "https://cdn.worldvectorlogo.com/logos/zapier.svg"
   },
   {
     icon: FileText,
     name: "Notion",
     description: "Workspace and documentation",
-    category: "Productivity"
+    category: "Productivity",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/e/e9/Notion-logo.svg"
   },
   {
     icon: Database,
     name: "HubSpot",
     description: "CRM and marketing automation",
-    category: "CRM"
+    category: "CRM",
+    logo: "https://www.svgrepo.com/show/331429/hubspot.svg"
   },
   {
     icon: Database,
     name: "Salesforce",
     description: "Enterprise CRM platform",
-    category: "CRM"
+    category: "CRM",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/f/f9/Salesforce.com_logo.svg"
   },
   {
     icon: Mail,
     name: "Gmail",
     description: "Email automation and notifications",
-    category: "Communications"
+    category: "Communications",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg"
   },
   {
     icon: MessageSquare,
     name: "Slack",
     description: "Team collaboration and alerts",
-    category: "Communications"
+    category: "Communications",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/d/d5/Slack_icon_2019.svg"
   }
 ];
 
@@ -96,21 +105,24 @@ export const Integrations = () => {
         {/* Integration Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-6 mb-12">
           {integrations.map((integration, index) => {
-            const Icon = integration.icon;
             return (
               <Card 
                 key={index}
-                className="p-6 bg-card border-border hover:border-primary/50 transition-all duration-300 hover:shadow-lg hover:shadow-primary/10 group animate-fade-in"
+                className="p-6 bg-card border-border hover:border-primary/50 transition-all duration-500 hover:shadow-lg hover:shadow-primary/10 group animate-fade-in hover:scale-105"
                 style={{ animationDelay: `${300 + index * 50}ms` }}
               >
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-colors duration-300">
-                    <Icon className="w-6 h-6 text-primary" />
+                  <div className="w-16 h-16 rounded-lg bg-background flex items-center justify-center flex-shrink-0 p-3 group-hover:scale-110 transition-transform duration-300">
+                    <img 
+                      src={integration.logo} 
+                      alt={`${integration.name} logo`} 
+                      className="w-full h-full object-contain"
+                    />
                   </div>
                   <div className="flex-1">
-                    <h3 className="font-semibold text-foreground mb-1 text-lg">{integration.name}</h3>
+                    <h3 className="font-semibold text-foreground mb-1 text-lg group-hover:text-primary transition-colors duration-300">{integration.name}</h3>
                     <p className="text-sm text-muted-foreground mb-2">{integration.description}</p>
-                    <span className="inline-block px-2 py-1 rounded-full bg-secondary/20 text-secondary-foreground text-xs font-medium">
+                    <span className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold border border-primary/20">
                       {integration.category}
                     </span>
                   </div>

@@ -20,10 +20,9 @@ export const Footer = () => {
           <div>
             <h3 className="font-semibold text-foreground mb-4">Product</h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
-              <li><a href="#" className="hover:text-primary transition-colors">Features</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors">Pricing</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors">Integrations</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors">API</a></li>
+              <li><a href="#features" className="hover:text-primary transition-colors">Features</a></li>
+              <li><a href="#pricing" className="hover:text-primary transition-colors">Pricing</a></li>
+              <li><a href="#integrations" className="hover:text-primary transition-colors">Integrations</a></li>
             </ul>
           </div>
 
@@ -31,10 +30,8 @@ export const Footer = () => {
           <div>
             <h3 className="font-semibold text-foreground mb-4">Company</h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
-              <li><a href="#" className="hover:text-primary transition-colors">About</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors">Blog</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors">Careers</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors">Contact</a></li>
+              <li><a href="https://ralvie.ai/blog/" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">Blog</a></li>
+              <li><a href="https://ralvie.ai/contact-support/" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">Contact</a></li>
             </ul>
           </div>
 
@@ -58,9 +55,8 @@ export const Footer = () => {
         <div className="pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-muted-foreground">
           <p>&copy; 2025 Ralvie AI. All rights reserved.</p>
           <div className="flex gap-6">
-            <a href="#" className="hover:text-primary transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-primary transition-colors">Terms of Service</a>
-            <a href="#" className="hover:text-primary transition-colors">Cookie Policy</a>
+            <a href="https://ralvie.ai/privacy-policy/" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">Privacy Policy</a>
+            <a href="https://ralvie.ai/terms-of-use/" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">Terms of Service</a>
           </div>
         </div>
       </div>
