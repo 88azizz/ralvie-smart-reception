@@ -57,7 +57,7 @@ export const TrustBadges = () => {
             <img 
               src="https://cdn-b.saashub.com/img/badges/approved-color.png?v=1" 
               alt="Ralvie AI - Approved on SaaSHub" 
-              className="h-11 w-auto object-contain"
+              className="h-14 w-auto object-contain"
             />
           </a>
 
@@ -71,7 +71,7 @@ export const TrustBadges = () => {
             <img 
               src="https://open-launch.com/images/badges/powered-by-light.svg" 
               alt="Powered by Open-Launch" 
-              className="h-11 w-auto object-contain"
+              className="h-14 w-auto object-contain"
             />
           </a>
 
@@ -84,7 +84,7 @@ export const TrustBadges = () => {
             <img 
               src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=996416&theme=light" 
               alt="Ralvie AI - Featured on Product Hunt" 
-              className="h-11 w-auto object-contain"
+              className="h-14 w-auto object-contain"
             />
           </a>
         </div>

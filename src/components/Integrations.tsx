@@ -8,21 +8,22 @@ const integrations = [
     name: "Calendly",
     description: "Automated scheduling and bookings",
     category: "Scheduling",
-    logo: "https://asset.brandfetch.io/idSUrLOILs/idV22YdKgU.svg"
+    logo: "https://images.ctfassets.net/k0lk9kiuza3o/3VSuGl6HABNS5k4MfWmqw0/70e1ea01be2b8f28e3b30b8b64c16c4b/calendly-logo-secondary-color.png"
   },
   {
     icon: Calendar,
     name: "Cal.com",
     description: "Open-source scheduling platform",
     category: "Scheduling",
-    logo: "https://cal.com/logo.svg"
+    logo: "https://cal.com/logo.svg",
+    darkLogo: true
   },
   {
     icon: Phone,
     name: "Twilio",
     description: "Voice and SMS communications",
     category: "Communications",
-    logo: "https://www.svgrepo.com/show/354464/twilio.svg"
+    logo: "https://cdn.brandfetch.io/idAnl512qI/w/512/h/511/theme/dark/icon.png?k=id64Mup7ac&t=1736268071570"
   },
   {
     icon: Zap,
@@ -43,7 +44,7 @@ const integrations = [
     name: "HubSpot",
     description: "CRM and marketing automation",
     category: "CRM",
-    logo: "https://www.svgrepo.com/show/331429/hubspot.svg"
+    logo: "https://cdn.brandfetch.io/idw382nG0m/w/512/h/511/theme/dark/icon.png?k=id64Mup7ac&t=1734024986859"
   },
   {
     icon: Database,
@@ -112,7 +113,9 @@ export const Integrations = () => {
                 style={{ animationDelay: `${300 + index * 50}ms` }}
               >
                 <div className="flex items-start gap-4">
-                  <div className="w-16 h-16 rounded-lg bg-background flex items-center justify-center flex-shrink-0 p-3 group-hover:scale-110 transition-transform duration-300">
+                  <div className={`w-16 h-16 rounded-lg flex items-center justify-center flex-shrink-0 p-3 group-hover:scale-110 transition-transform duration-300 ${
+                    integration.darkLogo ? 'bg-white' : 'bg-background'
+                  }`}>
                     <img 
                       src={integration.logo} 
                       alt={`${integration.name} logo`} 
