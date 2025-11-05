@@ -120,50 +120,52 @@ export const Pricing = () => {
                   </div>
                 )}
                 
-                <div className="flex items-center gap-3 mb-4">
-                  <div className={`w-12 h-12 rounded-full flex items-center justify-center ${
-                    plan.highlighted ? 'bg-primary/20' : 'bg-primary/10'
-                  }`}>
-                    <Icon className={`w-6 h-6 ${plan.highlighted ? 'text-primary' : 'text-primary'}`} />
+                <div className="flex flex-col h-full">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className={`w-12 h-12 rounded-full flex items-center justify-center ${
+                      plan.highlighted ? 'bg-primary/20' : 'bg-primary/10'
+                    }`}>
+                      <Icon className={`w-6 h-6 ${plan.highlighted ? 'text-primary' : 'text-primary'}`} />
+                    </div>
+                    <h3 className="text-2xl font-bold text-foreground">{plan.name}</h3>
                   </div>
-                  <h3 className="text-2xl font-bold text-foreground">{plan.name}</h3>
-                </div>
-                
-                <p className="text-muted-foreground text-sm mb-6">{plan.description}</p>
-                
-                <div className="mb-6">
-                  <div className="flex items-baseline gap-2">
-                    {plan.price !== "Custom" && <span className="text-muted-foreground">$</span>}
-                    <span className={`text-5xl font-bold ${plan.highlighted ? 'text-primary' : 'text-foreground'}`}>
-                      {plan.price}
-                    </span>
-                    {plan.price !== "Custom" && (
-                      <span className="text-muted-foreground">/month</span>
-                    )}
+                  
+                  <p className="text-muted-foreground text-sm mb-6 min-h-[40px]">{plan.description}</p>
+                  
+                  <div className="mb-6">
+                    <div className="flex items-baseline gap-2">
+                      {plan.price !== "Custom" && <span className="text-muted-foreground">$</span>}
+                      <span className={`text-5xl font-bold ${plan.highlighted ? 'text-primary' : 'text-foreground'}`}>
+                        {plan.price}
+                      </span>
+                      {plan.price !== "Custom" && (
+                        <span className="text-muted-foreground">/month</span>
+                      )}
+                    </div>
                   </div>
+                  
+                  <ul className="space-y-3 mb-8 flex-grow">
+                    {plan.features.map((feature, featureIndex) => (
+                      <li key={featureIndex} className="flex items-start gap-3 animate-fade-in" style={{ animationDelay: `${400 + index * 100 + featureIndex * 50}ms` }}>
+                        <Check className={`w-5 h-5 flex-shrink-0 mt-0.5 ${
+                          plan.highlighted ? 'text-primary' : 'text-primary'
+                        }`} />
+                        <span className="text-sm text-foreground">{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                
+                  <Button 
+                    className={`w-full mt-auto ${
+                      plan.highlighted 
+                        ? 'bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg' 
+                        : 'bg-primary/10 hover:bg-primary/20 text-primary'
+                    } transition-all duration-300 hover:scale-105`}
+                    size="lg"
+                  >
+                    Start Free Trial
+                  </Button>
                 </div>
-                
-                <ul className="space-y-3 mb-8">
-                  {plan.features.map((feature, featureIndex) => (
-                    <li key={featureIndex} className="flex items-start gap-3 animate-fade-in" style={{ animationDelay: `${400 + index * 100 + featureIndex * 50}ms` }}>
-                      <Check className={`w-5 h-5 flex-shrink-0 mt-0.5 ${
-                        plan.highlighted ? 'text-primary' : 'text-primary'
-                      }`} />
-                      <span className="text-sm text-foreground">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-                
-                <Button 
-                  className={`w-full ${
-                    plan.highlighted 
-                      ? 'bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg' 
-                      : 'bg-primary/10 hover:bg-primary/20 text-primary'
-                  } transition-all duration-300 hover:scale-105`}
-                  size="lg"
-                >
-                  Start Free Trial
-                </Button>
               </Card>
             );
           })}

@@ -8,6 +8,8 @@ import { Comparison } from "@/components/Comparison";
 import { ROICalculator } from "@/components/ROICalculator";
 import { Pricing } from "@/components/Pricing";
 import { SocialProof } from "@/components/SocialProof";
+import { Integrations } from "@/components/Integrations";
+import { TrustBadges } from "@/components/TrustBadges";
 import { CTA } from "@/components/CTA";
 import { FAQ } from "@/components/FAQ";
 import { Footer } from "@/components/Footer";
@@ -27,10 +29,12 @@ const Index = () => {
       </div>
       <Comparison />
       <ROICalculator />
+      <Integrations />
       <Pricing />
       <div id="testimonials">
         <SocialProof />
       </div>
+      <TrustBadges />
       <CTA />
       <div id="faq">
         <FAQ />
