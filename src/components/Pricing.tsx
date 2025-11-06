@@ -101,13 +101,13 @@ export const Pricing = () => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 lg:grid-cols-5 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-6">
           {plans.map((plan, index) => {
             const Icon = plan.icon;
             return (
               <Card 
                 key={index}
-                className={`p-8 relative overflow-hidden transition-all duration-500 hover:scale-105 animate-fade-in ${
+                className={`p-6 relative overflow-hidden transition-all duration-500 hover:scale-105 animate-fade-in ${
                   plan.highlighted 
                     ? 'bg-gradient-to-br from-primary/10 to-secondary/10 border-primary/50 shadow-2xl shadow-primary/20' 
                     : 'bg-card/50 backdrop-blur-sm border-primary/20 hover:border-primary/40'

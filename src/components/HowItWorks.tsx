@@ -68,14 +68,26 @@ export const HowItWorks = () => {
                   style={{ animationDelay: `${300 + index * 100}ms` }}
                 >
                   {/* Step number badge */}
-                  <div className={`absolute -top-4 -right-4 w-12 h-12 rounded-full bg-gradient-to-br from-${colorClass} to-${colorClass}/70 flex items-center justify-center text-background font-bold text-lg shadow-lg group-hover:scale-110 transition-transform duration-300`}>
+                  <div className={`absolute -top-4 -right-4 w-12 h-12 rounded-full flex items-center justify-center text-white font-bold text-lg shadow-lg group-hover:scale-110 transition-transform duration-300 ${
+                    step.color === 'primary' ? 'bg-gradient-to-br from-primary to-primary/70' :
+                    step.color === 'secondary' ? 'bg-gradient-to-br from-secondary to-secondary/70' :
+                    'bg-gradient-to-br from-accent to-accent/70'
+                  }`}>
                     {step.step}
                   </div>
 
                   <div className="space-y-4">
                     {/* Icon */}
-                    <div className={`w-16 h-16 rounded-2xl bg-${colorClass}/10 flex items-center justify-center group-hover:bg-${colorClass}/20 transition-all duration-300 group-hover:scale-110`}>
-                      <Icon className={`w-8 h-8 text-${colorClass}`} />
+                    <div className={`w-16 h-16 rounded-2xl flex items-center justify-center transition-all duration-300 group-hover:scale-110 ${
+                      step.color === 'primary' ? 'bg-primary/10 group-hover:bg-primary/20' :
+                      step.color === 'secondary' ? 'bg-secondary/10 group-hover:bg-secondary/20' :
+                      'bg-accent/10 group-hover:bg-accent/20'
+                    }`}>
+                      <Icon className={`w-8 h-8 ${
+                        step.color === 'primary' ? 'text-primary' :
+                        step.color === 'secondary' ? 'text-secondary' :
+                        'text-accent'
+                      }`} />
                     </div>
 
                     {/* Content */}
