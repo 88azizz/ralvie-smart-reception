@@ -37,9 +37,11 @@ export const Demo = () => {
               {/* Video container */}
               <div className="relative rounded-3xl overflow-hidden shadow-2xl border-2 border-primary/20 hover:border-primary/40 transition-all duration-500 hover:scale-105 group">
                 <video 
-                  controls
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
                   className="w-full h-auto"
-                  poster="/placeholder.svg"
                 >
                   <source src="/videos/ralvie-demo.mp4" type="video/mp4" />
                   Your browser does not support the video tag.
