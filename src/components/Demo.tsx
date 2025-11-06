@@ -1,7 +1,6 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Play, Volume2, Pause } from "lucide-react";
-import phoneInterface from "@/assets/phone-interface.jpg";
 import { useState } from "react";
 
 export const Demo = () => {
@@ -29,50 +28,20 @@ export const Demo = () => {
         </div>
 
         <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Phone interface mockup */}
+          {/* Video player */}
           <div className="relative animate-fade-in" style={{ animationDelay: '300ms' }}>
             <div className="relative max-w-md mx-auto">
               {/* Glow effect */}
               <div className="absolute -inset-4 bg-gradient-to-r from-primary/30 via-secondary/30 to-accent/30 rounded-3xl blur-3xl animate-pulse" />
               
-              {/* Phone container */}
-              <div className="relative rounded-3xl overflow-hidden shadow-2xl border-2 border-primary/20 hover:border-primary/40 transition-all duration-500 hover:scale-105 group">
-                <img 
-                  src={phoneInterface} 
-                  alt="AI Voice Interface" 
-                  className="w-full h-auto"
+              {/* Video container */}
+              <div className="relative rounded-3xl overflow-hidden shadow-2xl border-2 border-primary/20 hover:border-primary/40 transition-all duration-500">
+                <iframe 
+                  src="https://zktecodev-my.sharepoint.com/personal/srirama/_layouts/15/embed.aspx?UniqueId=e101db64-c1e0-1d9d-869a-3e560e29a4de&embed=%7B%22ust%22%3Atrue%2C%22hv%22%3A%22CopyEmbedCode%22%7D&referrer=StreamWebApp&referrerScenario=EmbedDialog.Create"
+                  className="w-full aspect-video"
+                  allowFullScreen
+                  title="Ralvie Demo Video"
                 />
-                
-                {/* Play button overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/50 to-transparent flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
-                  <Button
-                    size="lg"
-                    onClick={() => setIsPlaying(!isPlaying)}
-                    className="rounded-full w-20 h-20 bg-primary hover:bg-primary/90 shadow-2xl hover:scale-110 transition-all duration-300"
-                  >
-                    {isPlaying ? (
-                      <Pause className="w-8 h-8" />
-                    ) : (
-                      <Play className="w-8 h-8 ml-1" />
-                    )}
-                  </Button>
-                </div>
-
-                {/* Animated waveform indicator */}
-                {isPlaying && (
-                  <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-1">
-                    {[...Array(5)].map((_, i) => (
-                      <div
-                        key={i}
-                        className="w-1 bg-primary rounded-full animate-pulse"
-                        style={{
-                          height: `${20 + Math.random() * 20}px`,
-                          animationDelay: `${i * 100}ms`,
-                        }}
-                      />
-                    ))}
-                  </div>
-                )}
               </div>
             </div>
           </div>
