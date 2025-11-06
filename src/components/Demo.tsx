@@ -35,13 +35,15 @@ export const Demo = () => {
               <div className="absolute -inset-4 bg-gradient-to-r from-primary/30 via-secondary/30 to-accent/30 rounded-3xl blur-3xl animate-pulse" />
               
               {/* Video container */}
-              <div className="relative rounded-3xl overflow-hidden shadow-2xl border-2 border-primary/20 hover:border-primary/40 transition-all duration-500">
-                <iframe 
-                  src="https://zktecodev-my.sharepoint.com/personal/srirama/_layouts/15/embed.aspx?UniqueId=e101db64-c1e0-1d9d-869a-3e560e29a4de&embed=%7B%22ust%22%3Atrue%2C%22hv%22%3A%22CopyEmbedCode%22%7D&referrer=StreamWebApp&referrerScenario=EmbedDialog.Create"
-                  className="w-full aspect-video"
-                  allowFullScreen
-                  title="Ralvie Demo Video"
-                />
+              <div className="relative rounded-3xl overflow-hidden shadow-2xl border-2 border-primary/20 hover:border-primary/40 transition-all duration-500 hover:scale-105 group">
+                <video 
+                  controls
+                  className="w-full h-auto"
+                  poster="/placeholder.svg"
+                >
+                  <source src="/videos/ralvie-demo.mp4" type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
               </div>
             </div>
           </div>
