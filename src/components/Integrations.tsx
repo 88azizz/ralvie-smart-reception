@@ -8,7 +8,8 @@ const integrations = [
     name: "Calendly",
     description: "Automated scheduling and bookings",
     category: "Scheduling",
-    logo: "https://images.ctfassets.net/k0lk9kiuza3o/3VSuGl6HABNS5k4MfWmqw0/70e1ea01be2b8f28e3b30b8b64c16c4b/calendly-logo-secondary-color.png"
+    logo: "https://images.ctfassets.net/k0lk9kiuza3o/3VSuGl6HABNS5k4MfWmqw0/70e1ea01be2b8f28e3b30b8b64c16c4b/calendly-logo-secondary-color.png",
+    darkLogo: true
   },
   {
     icon: Calendar,

@@ -129,11 +129,10 @@ export const UseCases = () => {
 
                   {/* CTA */}
                   <Button 
-                    variant="ghost" 
-                    className="w-full mt-4 group/btn hover:bg-primary/10 hover:text-primary transition-all duration-300"
+                    className="w-full mt-4 group/btn bg-primary/10 hover:bg-primary hover:text-primary-foreground text-primary transition-all duration-300 hover:scale-105 shadow-sm hover:shadow-lg"
                     asChild
                   >
-                    <Link to={useCase.link}>
+                    <Link to={useCase.link} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
                       Learn More
                       <ArrowRight className="ml-2 w-4 h-4 group-hover/btn:translate-x-1 transition-transform duration-300" />
                     </Link>

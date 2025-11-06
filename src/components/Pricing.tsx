@@ -162,8 +162,11 @@ export const Pricing = () => {
                         : 'bg-primary/10 hover:bg-primary/20 text-primary'
                     } transition-all duration-300 hover:scale-105`}
                     size="lg"
+                    asChild
                   >
-                    Start Free Trial
+                    <a href="https://app.frontdesk.ralvie.ai/client-trial?_gl=1*1jjx8y8*_ga*NDEwMDkzNDE2LjE3NTE5NTkwOTQ.*_ga_71TD7P1FL4*czE3NjIzMTY5ODYkbzExNyRnMSR0MTc2MjMxNzI3MiRqNTkkbDAkaDA." target="_blank" rel="noopener noreferrer">
+                      Start Free Trial
+                    </a>
                   </Button>
                 </div>
               </Card>

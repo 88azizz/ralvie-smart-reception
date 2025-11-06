@@ -29,8 +29,12 @@ const Index = () => {
       </div>
       <Comparison />
       <ROICalculator />
-      <Integrations />
-      <Pricing />
+      <div id="integrations">
+        <Integrations />
+      </div>
+      <div id="pricing">
+        <Pricing />
+      </div>
       <div id="testimonials">
         <SocialProof />
       </div>
