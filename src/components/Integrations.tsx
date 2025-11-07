@@ -8,7 +8,7 @@ const integrations = [
     name: "Zoho CRM",
     description: "Customer relationship management platform",
     category: "CRM",
-    logo: "https://www.zohowebstatic.com/sites/zweb/images/zoho-logo-new.svg"
+    logo: "https://cdn.brandfetch.io/idw7ZLogXq/w/512/h/512/theme/dark/icon.png?k=id64Mup7ac&t=1734024986859"
   },
   {
     icon: Calendar,
