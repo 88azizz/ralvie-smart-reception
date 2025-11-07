@@ -4,11 +4,11 @@ import { Calendar, Phone, Zap, FileText, Database, Mail, MessageSquare, CheckCir
 
 const integrations = [
   {
-    icon: Calendar,
-    name: "Calendly",
-    description: "Automated scheduling and bookings",
-    category: "Scheduling",
-    logo: "https://assets.calendly.com/packs/frontend/media/logo-square-cd364a3c33c57ff1.png"
+    icon: Database,
+    name: "Zoho CRM",
+    description: "Customer relationship management platform",
+    category: "CRM",
+    logo: "https://www.zohowebstatic.com/sites/zweb/images/zoho-logo-new.svg"
   },
   {
     icon: Calendar,

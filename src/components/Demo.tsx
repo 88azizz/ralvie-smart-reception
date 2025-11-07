@@ -112,14 +112,6 @@ export const Demo = () => {
               </div>
             </Card>
 
-            <div className="pt-4">
-              <Button 
-                size="lg" 
-                className="w-full bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
-              >
-                Try Live Demo Call
-              </Button>
-            </div>
           </div>
         </div>
       </div>
