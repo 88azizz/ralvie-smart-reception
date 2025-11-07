@@ -8,7 +8,7 @@ const integrations = [
     name: "Zoho CRM",
     description: "Customer relationship management platform",
     category: "CRM",
-    logo: "https://cdn.brandfetch.io/idw7ZLogXq/w/512/h/512/theme/dark/icon.png?k=id64Mup7ac&t=1734024986859"
+    logo: "/images/zoho-logo.png"
   },
   {
     icon: Calendar,
@@ -23,7 +23,7 @@ const integrations = [
     name: "Twilio",
     description: "Voice and SMS communications",
     category: "Communications",
-    logo: "https://cdn.brandfetch.io/idAnl512qI/w/512/h/511/theme/dark/icon.png?k=id64Mup7ac&t=1736268071570"
+    logo: "https://www.logo.wine/a/logo/Twilio/Twilio-Logo.wine.svg"
   },
   {
     icon: Zap,
