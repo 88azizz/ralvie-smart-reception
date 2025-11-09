@@ -1,13 +1,17 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Check, Sparkles, Building2, Rocket } from "lucide-react";
+import { useState } from "react";
 
 export const Pricing = () => {
+  const [isAnnual, setIsAnnual] = useState(false);
+  
   const plans = [
     {
       name: "Solopreneur",
       icon: Sparkles,
-      price: "39",
+      monthlyPrice: "39",
+      annualPrice: "390",
       description: "Perfect for freelancers and solo businesses.",
       features: [
         "150 voice minutes",
@@ -22,7 +26,8 @@ export const Pricing = () => {
     {
       name: "Starter",
       icon: Sparkles,
-      price: "99",
+      monthlyPrice: "99",
+      annualPrice: "990",
       description: "For growing businesses ready to automate more.",
       features: [
         "150 voice minutes",
@@ -37,7 +42,8 @@ export const Pricing = () => {
     {
       name: "Professional",
       icon: Building2,
-      price: "299",
+      monthlyPrice: "299",
+      annualPrice: "2990",
       description: "Ideal for teams handling higher call volumes.",
       features: [
         "1,000 voice minutes",
@@ -52,7 +58,8 @@ export const Pricing = () => {
     {
       name: "Business",
       icon: Building2,
-      price: "599",
+      monthlyPrice: "599",
+      annualPrice: "5990",
       description: "For businesses that need scale and reliability.",
       features: [
         "2,500 voice minutes",
@@ -67,7 +74,8 @@ export const Pricing = () => {
     {
       name: "Enterprise",
       icon: Rocket,
-      price: "999",
+      monthlyPrice: "999",
+      annualPrice: "9990",
       description: "For enterprises needing customization & compliance.",
       features: [
         "5,000 voice minutes",
@@ -99,15 +107,34 @@ export const Pricing = () => {
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto animate-fade-in" style={{ animationDelay: '200ms' }}>
             No hidden fees. No setup costs. Cancel anytime.
           </p>
+          
+          {/* Annual/Monthly Toggle */}
+          <div className="flex items-center justify-center gap-4 mt-8 animate-fade-in" style={{ animationDelay: '250ms' }}>
+            <span className={`text-sm font-medium transition-colors ${!isAnnual ? 'text-foreground' : 'text-muted-foreground'}`}>
+              Monthly
+            </span>
+            <button
+              onClick={() => setIsAnnual(!isAnnual)}
+              className="relative w-14 h-7 bg-primary/20 rounded-full transition-colors hover:bg-primary/30"
+              aria-label="Toggle pricing"
+            >
+              <div className={`absolute top-1 left-1 w-5 h-5 bg-primary rounded-full transition-transform duration-300 ${isAnnual ? 'translate-x-7' : 'translate-x-0'}`} />
+            </button>
+            <span className={`text-sm font-medium transition-colors ${isAnnual ? 'text-foreground' : 'text-muted-foreground'}`}>
+              Annual
+              <span className="ml-2 text-xs text-primary font-semibold">Save 17%</span>
+            </span>
+          </div>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 max-w-[1800px] mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6 max-w-[1800px] mx-auto px-4">
           {plans.map((plan, index) => {
             const Icon = plan.icon;
+            const displayPrice = isAnnual ? plan.annualPrice : plan.monthlyPrice;
             return (
               <Card 
                 key={index}
-                className={`p-5 relative overflow-hidden transition-all duration-500 hover:scale-105 animate-fade-in min-w-[280px] ${
+                className={`p-5 relative overflow-hidden transition-all duration-500 hover:scale-105 animate-fade-in w-full ${
                   plan.highlighted 
                     ? 'bg-gradient-to-br from-primary/10 to-secondary/10 border-primary/50 shadow-2xl shadow-primary/20' 
                     : 'bg-card/50 backdrop-blur-sm border-primary/20 hover:border-primary/40'
@@ -134,14 +161,17 @@ export const Pricing = () => {
                   
                   <div className="mb-6">
                     <div className="flex items-baseline gap-2">
-                      {plan.price !== "Custom" && <span className="text-muted-foreground">$</span>}
+                      <span className="text-muted-foreground">$</span>
                       <span className={`text-5xl font-bold ${plan.highlighted ? 'text-primary' : 'text-foreground'}`}>
-                        {plan.price}
+                        {displayPrice}
                       </span>
-                      {plan.price !== "Custom" && (
-                        <span className="text-muted-foreground">/month</span>
-                      )}
+                      <span className="text-muted-foreground">/{isAnnual ? 'year' : 'month'}</span>
                     </div>
+                    {isAnnual && (
+                      <p className="text-sm text-primary mt-2">
+                        ${plan.monthlyPrice}/month billed annually
+                      </p>
+                    )}
                   </div>
                   
                   <ul className="space-y-3 mb-8 flex-grow">
