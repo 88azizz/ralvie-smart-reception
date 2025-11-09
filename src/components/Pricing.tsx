@@ -127,14 +127,14 @@ export const Pricing = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6 max-w-[1800px] mx-auto px-4">
+        <div className="flex flex-wrap justify-center gap-6 max-w-[1800px] mx-auto px-4">
           {plans.map((plan, index) => {
             const Icon = plan.icon;
             const displayPrice = isAnnual ? plan.annualPrice : plan.monthlyPrice;
             return (
               <Card 
                 key={index}
-                className={`p-5 relative overflow-hidden transition-all duration-500 hover:scale-105 animate-fade-in w-full ${
+                className={`p-5 relative overflow-hidden transition-all duration-500 hover:scale-105 animate-fade-in flex-1 min-w-[280px] max-w-[320px] ${
                   plan.highlighted 
                     ? 'bg-gradient-to-br from-primary/10 to-secondary/10 border-primary/50 shadow-2xl shadow-primary/20' 
                     : 'bg-card/50 backdrop-blur-sm border-primary/20 hover:border-primary/40'
@@ -221,6 +221,195 @@ export const Pricing = () => {
               <Check className="w-4 h-4 text-primary" />
               <span>Cancel anytime</span>
             </div>
+          </div>
+        </div>
+
+        {/* Comparison Table */}
+        <div className="mt-24">
+          <div className="text-center mb-12">
+            <h3 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-4">
+              Compare All Features
+            </h3>
+            <p className="text-muted-foreground">
+              Detailed breakdown of what's included in each plan
+            </p>
+          </div>
+
+          <div className="overflow-x-auto">
+            <table className="w-full border-collapse bg-card/50 backdrop-blur-sm rounded-lg overflow-hidden">
+              <thead>
+                <tr className="border-b border-border">
+                  <th className="text-left p-4 font-semibold text-foreground sticky left-0 bg-card/90 backdrop-blur-sm z-10">
+                    Features
+                  </th>
+                  {plans.map((plan, index) => (
+                    <th key={index} className={`p-4 text-center font-semibold min-w-[140px] ${plan.highlighted ? 'bg-primary/10' : ''}`}>
+                      <div className="flex flex-col items-center gap-2">
+                        <span className="text-foreground">{plan.name}</span>
+                        <span className="text-2xl font-bold text-primary">
+                          ${isAnnual ? plan.annualPrice : plan.monthlyPrice}
+                        </span>
+                      </div>
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {/* Voice & SMS */}
+                <tr className="border-b border-border hover:bg-muted/50 transition-colors">
+                  <td className="p-4 font-medium text-foreground sticky left-0 bg-card/90 backdrop-blur-sm">Voice Minutes</td>
+                  <td className="p-4 text-center text-muted-foreground">150</td>
+                  <td className="p-4 text-center text-muted-foreground">150</td>
+                  <td className="p-4 text-center text-muted-foreground bg-primary/5">1,000</td>
+                  <td className="p-4 text-center text-muted-foreground">2,500</td>
+                  <td className="p-4 text-center text-muted-foreground">5,000</td>
+                </tr>
+                <tr className="border-b border-border hover:bg-muted/50 transition-colors">
+                  <td className="p-4 font-medium text-foreground sticky left-0 bg-card/90 backdrop-blur-sm">SMS Messages</td>
+                  <td className="p-4 text-center text-muted-foreground">150</td>
+                  <td className="p-4 text-center text-muted-foreground">150</td>
+                  <td className="p-4 text-center text-muted-foreground bg-primary/5">1,000</td>
+                  <td className="p-4 text-center text-muted-foreground">2,500</td>
+                  <td className="p-4 text-center text-muted-foreground">5,000</td>
+                </tr>
+
+                {/* Core Features */}
+                <tr className="border-b border-border hover:bg-muted/50 transition-colors">
+                  <td className="p-4 font-medium text-foreground sticky left-0 bg-card/90 backdrop-blur-sm">Premium Voices (100+)</td>
+                  <td className="p-4 text-center"><Check className="w-5 h-5 text-primary mx-auto" /></td>
+                  <td className="p-4 text-center"><Check className="w-5 h-5 text-primary mx-auto" /></td>
+                  <td className="p-4 text-center bg-primary/5"><Check className="w-5 h-5 text-primary mx-auto" /></td>
+                  <td className="p-4 text-center"><Check className="w-5 h-5 text-primary mx-auto" /></td>
+                  <td className="p-4 text-center"><Check className="w-5 h-5 text-primary mx-auto" /></td>
+                </tr>
+                <tr className="border-b border-border hover:bg-muted/50 transition-colors">
+                  <td className="p-4 font-medium text-foreground sticky left-0 bg-card/90 backdrop-blur-sm">Multilingual Support</td>
+                  <td className="p-4 text-center"><Check className="w-5 h-5 text-primary mx-auto" /></td>
+                  <td className="p-4 text-center"><Check className="w-5 h-5 text-primary mx-auto" /></td>
+                  <td className="p-4 text-center bg-primary/5"><Check className="w-5 h-5 text-primary mx-auto" /></td>
+                  <td className="p-4 text-center"><Check className="w-5 h-5 text-primary mx-auto" /></td>
+                  <td className="p-4 text-center"><Check className="w-5 h-5 text-primary mx-auto" /></td>
+                </tr>
+                <tr className="border-b border-border hover:bg-muted/50 transition-colors">
+                  <td className="p-4 font-medium text-foreground sticky left-0 bg-card/90 backdrop-blur-sm">Call Routing</td>
+                  <td className="p-4 text-center text-muted-foreground">Basic</td>
+                  <td className="p-4 text-center text-muted-foreground">Basic</td>
+                  <td className="p-4 text-center text-muted-foreground bg-primary/5">Advanced</td>
+                  <td className="p-4 text-center text-muted-foreground">Advanced</td>
+                  <td className="p-4 text-center text-muted-foreground">Advanced</td>
+                </tr>
+                <tr className="border-b border-border hover:bg-muted/50 transition-colors">
+                  <td className="p-4 font-medium text-foreground sticky left-0 bg-card/90 backdrop-blur-sm">Analytics</td>
+                  <td className="p-4 text-center text-muted-foreground">Standard</td>
+                  <td className="p-4 text-center text-muted-foreground">Standard</td>
+                  <td className="p-4 text-center text-muted-foreground bg-primary/5">Advanced</td>
+                  <td className="p-4 text-center text-muted-foreground">Advanced</td>
+                  <td className="p-4 text-center text-muted-foreground">Advanced</td>
+                </tr>
+
+                {/* Advanced Features */}
+                <tr className="border-b border-border hover:bg-muted/50 transition-colors">
+                  <td className="p-4 font-medium text-foreground sticky left-0 bg-card/90 backdrop-blur-sm">Call Transcription</td>
+                  <td className="p-4 text-center text-muted-foreground">—</td>
+                  <td className="p-4 text-center"><Check className="w-5 h-5 text-primary mx-auto" /></td>
+                  <td className="p-4 text-center bg-primary/5"><Check className="w-5 h-5 text-primary mx-auto" /></td>
+                  <td className="p-4 text-center"><Check className="w-5 h-5 text-primary mx-auto" /></td>
+                  <td className="p-4 text-center"><Check className="w-5 h-5 text-primary mx-auto" /></td>
+                </tr>
+                <tr className="border-b border-border hover:bg-muted/50 transition-colors">
+                  <td className="p-4 font-medium text-foreground sticky left-0 bg-card/90 backdrop-blur-sm">CRM Integrations</td>
+                  <td className="p-4 text-center text-muted-foreground">—</td>
+                  <td className="p-4 text-center"><Check className="w-5 h-5 text-primary mx-auto" /></td>
+                  <td className="p-4 text-center bg-primary/5"><Check className="w-5 h-5 text-primary mx-auto" /></td>
+                  <td className="p-4 text-center"><Check className="w-5 h-5 text-primary mx-auto" /></td>
+                  <td className="p-4 text-center"><Check className="w-5 h-5 text-primary mx-auto" /></td>
+                </tr>
+                <tr className="border-b border-border hover:bg-muted/50 transition-colors">
+                  <td className="p-4 font-medium text-foreground sticky left-0 bg-card/90 backdrop-blur-sm">API Access</td>
+                  <td className="p-4 text-center text-muted-foreground">—</td>
+                  <td className="p-4 text-center"><Check className="w-5 h-5 text-primary mx-auto" /></td>
+                  <td className="p-4 text-center bg-primary/5"><Check className="w-5 h-5 text-primary mx-auto" /></td>
+                  <td className="p-4 text-center"><Check className="w-5 h-5 text-primary mx-auto" /></td>
+                  <td className="p-4 text-center"><Check className="w-5 h-5 text-primary mx-auto" /></td>
+                </tr>
+                <tr className="border-b border-border hover:bg-muted/50 transition-colors">
+                  <td className="p-4 font-medium text-foreground sticky left-0 bg-card/90 backdrop-blur-sm">Workflow Automations</td>
+                  <td className="p-4 text-center text-muted-foreground">—</td>
+                  <td className="p-4 text-center text-muted-foreground">Up to 5</td>
+                  <td className="p-4 text-center text-muted-foreground bg-primary/5">Unlimited</td>
+                  <td className="p-4 text-center text-muted-foreground">Unlimited</td>
+                  <td className="p-4 text-center text-muted-foreground">Unlimited</td>
+                </tr>
+                <tr className="border-b border-border hover:bg-muted/50 transition-colors">
+                  <td className="p-4 font-medium text-foreground sticky left-0 bg-card/90 backdrop-blur-sm">6,000+ Integrations</td>
+                  <td className="p-4 text-center text-muted-foreground">—</td>
+                  <td className="p-4 text-center"><Check className="w-5 h-5 text-primary mx-auto" /></td>
+                  <td className="p-4 text-center bg-primary/5"><Check className="w-5 h-5 text-primary mx-auto" /></td>
+                  <td className="p-4 text-center"><Check className="w-5 h-5 text-primary mx-auto" /></td>
+                  <td className="p-4 text-center"><Check className="w-5 h-5 text-primary mx-auto" /></td>
+                </tr>
+
+                {/* Professional Features */}
+                <tr className="border-b border-border hover:bg-muted/50 transition-colors">
+                  <td className="p-4 font-medium text-foreground sticky left-0 bg-card/90 backdrop-blur-sm">Call Monitoring</td>
+                  <td className="p-4 text-center text-muted-foreground">—</td>
+                  <td className="p-4 text-center text-muted-foreground">—</td>
+                  <td className="p-4 text-center bg-primary/5"><Check className="w-5 h-5 text-primary mx-auto" /></td>
+                  <td className="p-4 text-center"><Check className="w-5 h-5 text-primary mx-auto" /></td>
+                  <td className="p-4 text-center"><Check className="w-5 h-5 text-primary mx-auto" /></td>
+                </tr>
+                <tr className="border-b border-border hover:bg-muted/50 transition-colors">
+                  <td className="p-4 font-medium text-foreground sticky left-0 bg-card/90 backdrop-blur-sm">Priority Support</td>
+                  <td className="p-4 text-center text-muted-foreground">—</td>
+                  <td className="p-4 text-center text-muted-foreground">—</td>
+                  <td className="p-4 text-center text-muted-foreground bg-primary/5">Chat + Email</td>
+                  <td className="p-4 text-center text-muted-foreground">Chat + Email</td>
+                  <td className="p-4 text-center text-muted-foreground">Dedicated Rep</td>
+                </tr>
+                <tr className="border-b border-border hover:bg-muted/50 transition-colors">
+                  <td className="p-4 font-medium text-foreground sticky left-0 bg-card/90 backdrop-blur-sm">Data Retention</td>
+                  <td className="p-4 text-center text-muted-foreground">3 months</td>
+                  <td className="p-4 text-center text-muted-foreground">6 months</td>
+                  <td className="p-4 text-center text-muted-foreground bg-primary/5">12 months</td>
+                  <td className="p-4 text-center text-muted-foreground">12 months</td>
+                  <td className="p-4 text-center text-muted-foreground">Unlimited</td>
+                </tr>
+                <tr className="border-b border-border hover:bg-muted/50 transition-colors">
+                  <td className="p-4 font-medium text-foreground sticky left-0 bg-card/90 backdrop-blur-sm">Slack/Teams Support</td>
+                  <td className="p-4 text-center text-muted-foreground">—</td>
+                  <td className="p-4 text-center text-muted-foreground">—</td>
+                  <td className="p-4 text-center text-muted-foreground bg-primary/5">—</td>
+                  <td className="p-4 text-center"><Check className="w-5 h-5 text-primary mx-auto" /></td>
+                  <td className="p-4 text-center"><Check className="w-5 h-5 text-primary mx-auto" /></td>
+                </tr>
+
+                {/* Enterprise Features */}
+                <tr className="border-b border-border hover:bg-muted/50 transition-colors">
+                  <td className="p-4 font-medium text-foreground sticky left-0 bg-card/90 backdrop-blur-sm">Compliance (HIPAA, SOC2, GDPR)</td>
+                  <td className="p-4 text-center text-muted-foreground">—</td>
+                  <td className="p-4 text-center text-muted-foreground">—</td>
+                  <td className="p-4 text-center text-muted-foreground bg-primary/5">—</td>
+                  <td className="p-4 text-center text-muted-foreground">—</td>
+                  <td className="p-4 text-center"><Check className="w-5 h-5 text-primary mx-auto" /></td>
+                </tr>
+                <tr className="border-b border-border hover:bg-muted/50 transition-colors">
+                  <td className="p-4 font-medium text-foreground sticky left-0 bg-card/90 backdrop-blur-sm">Custom Integrations</td>
+                  <td className="p-4 text-center text-muted-foreground">—</td>
+                  <td className="p-4 text-center text-muted-foreground">—</td>
+                  <td className="p-4 text-center text-muted-foreground bg-primary/5">—</td>
+                  <td className="p-4 text-center text-muted-foreground">—</td>
+                  <td className="p-4 text-center"><Check className="w-5 h-5 text-primary mx-auto" /></td>
+                </tr>
+                <tr className="hover:bg-muted/50 transition-colors">
+                  <td className="p-4 font-medium text-foreground sticky left-0 bg-card/90 backdrop-blur-sm">Custom SLAs</td>
+                  <td className="p-4 text-center text-muted-foreground">—</td>
+                  <td className="p-4 text-center text-muted-foreground">—</td>
+                  <td className="p-4 text-center text-muted-foreground bg-primary/5">—</td>
+                  <td className="p-4 text-center text-muted-foreground">—</td>
+                  <td className="p-4 text-center"><Check className="w-5 h-5 text-primary mx-auto" /></td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
