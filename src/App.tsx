@@ -12,6 +12,7 @@ import EducationCaseStudy from "./pages/case-studies/Education";
 import Resources from "./pages/Resources";
 import PricingPage from "./pages/PricingPage";
 import IntegrationsPage from "./pages/IntegrationsPage";
+import BlogPost from "./pages/BlogPost";
 
 const queryClient = new QueryClient();
 
@@ -24,6 +25,7 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/resources" element={<Resources />} />
+          <Route path="/blog/:slug" element={<BlogPost />} />
           <Route path="/pricing" element={<PricingPage />} />
           <Route path="/integrations" element={<IntegrationsPage />} />
           <Route path="/case-studies/hospitality" element={<HospitalityCaseStudy />} />
