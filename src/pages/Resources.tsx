@@ -86,43 +86,67 @@ const articles = [
   },
 ];
 
+type CategoryFilter = "all" | "guides" | "videos" | "blogs" | "articles";
+
+const categoryTabs: { id: CategoryFilter; label: string; icon: typeof BookOpen }[] = [
+  { id: "all", label: "All", icon: BookOpen },
+  { id: "guides", label: "Guides", icon: BookOpen },
+  { id: "videos", label: "Videos", icon: Video },
+  { id: "blogs", label: "Blogs", icon: Newspaper },
+  { id: "articles", label: "Articles", icon: FileText },
+];
+
 const Resources = () => {
   const [searchQuery, setSearchQuery] = useState("");
+  const [activeCategory, setActiveCategory] = useState<CategoryFilter>("all");
 
   const filteredContent = useMemo(() => {
     const query = searchQuery.toLowerCase().trim();
     
+    let baseGuides = guides;
+    let baseVideos = videoTutorials;
+    let baseBlogs = blogPosts;
+    let baseArticles = articles;
+
+    // Apply category filter first
+    if (activeCategory !== "all") {
+      baseGuides = activeCategory === "guides" ? guides : [];
+      baseVideos = activeCategory === "videos" ? videoTutorials : [];
+      baseBlogs = activeCategory === "blogs" ? blogPosts : [];
+      baseArticles = activeCategory === "articles" ? articles : [];
+    }
+    
     if (!query) {
       return {
-        guides,
-        videoTutorials,
-        blogs: blogPosts,
-        articles,
-        hasResults: true,
+        guides: baseGuides,
+        videoTutorials: baseVideos,
+        blogs: baseBlogs,
+        articles: baseArticles,
+        hasResults: baseGuides.length > 0 || baseVideos.length > 0 || baseBlogs.length > 0 || baseArticles.length > 0,
       };
     }
 
-    const filteredGuides = guides.filter(
+    const filteredGuides = baseGuides.filter(
       (item) =>
         item.title.toLowerCase().includes(query) ||
         item.description.toLowerCase().includes(query) ||
         item.category.toLowerCase().includes(query)
     );
 
-    const filteredVideos = videoTutorials.filter(
+    const filteredVideos = baseVideos.filter(
       (item) =>
         item.title.toLowerCase().includes(query) ||
         item.description.toLowerCase().includes(query)
     );
 
-    const filteredBlogs = blogPosts.filter(
+    const filteredBlogs = baseBlogs.filter(
       (item) =>
         item.title.toLowerCase().includes(query) ||
         item.description.toLowerCase().includes(query) ||
         item.category.toLowerCase().includes(query)
     );
 
-    const filteredArticles = articles.filter(
+    const filteredArticles = baseArticles.filter(
       (item) =>
         item.title.toLowerCase().includes(query) ||
         item.description.toLowerCase().includes(query) ||
@@ -136,7 +160,7 @@ const Resources = () => {
       articles: filteredArticles,
       hasResults: filteredGuides.length > 0 || filteredVideos.length > 0 || filteredBlogs.length > 0 || filteredArticles.length > 0,
     };
-  }, [searchQuery]);
+  }, [searchQuery, activeCategory]);
 
   return (
     <div className="min-h-screen bg-background">
@@ -173,6 +197,29 @@ const Resources = () => {
             )}
           </div>
           
+          {/* Category Filter Tabs */}
+          <div className="flex flex-wrap justify-center gap-2 mt-8 animate-fade-in" style={{ animationDelay: "0.3s" }}>
+            {categoryTabs.map((tab) => {
+              const Icon = tab.icon;
+              return (
+                <Button
+                  key={tab.id}
+                  variant={activeCategory === tab.id ? "default" : "outline"}
+                  size="sm"
+                  onClick={() => setActiveCategory(tab.id)}
+                  className={`flex items-center gap-2 transition-all ${
+                    activeCategory === tab.id 
+                      ? "bg-primary text-primary-foreground" 
+                      : "bg-card/50 border-border/50 hover:border-primary/50"
+                  }`}
+                >
+                  <Icon className="h-4 w-4" />
+                  {tab.label}
+                </Button>
+              );
+            })}
+          </div>
+
           {searchQuery && (
             <p className="mt-4 text-muted-foreground animate-fade-in">
               {filteredContent.hasResults
