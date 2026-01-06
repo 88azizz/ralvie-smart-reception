@@ -5,84 +5,149 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { BookOpen, Video, FileText, Newspaper, ArrowRight, Clock, Calendar, Search, X } from "lucide-react";
+import { BookOpen, Video, FileText, Newspaper, ArrowRight, Clock, Calendar, Search, X, Star, ChevronLeft, ChevronRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { blogPosts } from "@/data/blogPosts";
 
-const guides = [
+interface Guide {
+  slug: string;
+  title: string;
+  description: string;
+  readTime: string;
+  category: string;
+  featured?: boolean;
+  relatedSlugs: string[];
+}
+
+interface VideoTutorial {
+  slug: string;
+  title: string;
+  description: string;
+  duration: string;
+  thumbnail: string;
+  featured?: boolean;
+  relatedSlugs: string[];
+}
+
+interface Article {
+  slug: string;
+  title: string;
+  description: string;
+  category: string;
+  featured?: boolean;
+  relatedSlugs: string[];
+}
+
+const guides: Guide[] = [
   {
+    slug: "getting-started-ralvie-ai",
     title: "Getting Started with Ralvie AI",
     description: "A comprehensive guide to setting up your AI receptionist in under 10 minutes.",
     readTime: "5 min read",
     category: "Beginner",
+    featured: true,
+    relatedSlugs: ["customizing-ai-voice", "integration-best-practices"],
   },
   {
+    slug: "customizing-ai-voice",
     title: "Customizing Your AI Voice",
     description: "Learn how to personalize your AI receptionist's voice and personality.",
     readTime: "8 min read",
     category: "Intermediate",
+    featured: false,
+    relatedSlugs: ["getting-started-ralvie-ai", "optimizing-call-handling"],
   },
   {
+    slug: "integration-best-practices",
     title: "Integration Best Practices",
     description: "Tips for seamlessly integrating Ralvie AI with your existing systems.",
     readTime: "10 min read",
     category: "Advanced",
+    featured: true,
+    relatedSlugs: ["getting-started-ralvie-ai", "optimizing-call-handling"],
   },
   {
+    slug: "optimizing-call-handling",
     title: "Optimizing Call Handling",
     description: "Strategies to improve your AI receptionist's efficiency and customer satisfaction.",
     readTime: "7 min read",
     category: "Intermediate",
+    featured: false,
+    relatedSlugs: ["customizing-ai-voice", "integration-best-practices"],
   },
 ];
 
-const videoTutorials = [
+const videoTutorials: VideoTutorial[] = [
   {
+    slug: "quick-setup-tutorial",
     title: "Quick Setup Tutorial",
     description: "Watch how to get your AI receptionist up and running in minutes.",
     duration: "4:32",
     thumbnail: "🎬",
+    featured: true,
+    relatedSlugs: ["calendar-integration-walkthrough", "advanced-customization"],
   },
   {
+    slug: "calendar-integration-walkthrough",
     title: "Calendar Integration Walkthrough",
     description: "Step-by-step guide to connecting your booking system.",
     duration: "6:15",
     thumbnail: "📅",
+    featured: false,
+    relatedSlugs: ["quick-setup-tutorial", "analytics-dashboard-overview"],
   },
   {
+    slug: "advanced-customization",
     title: "Advanced Customization",
     description: "Deep dive into personalizing your AI receptionist experience.",
     duration: "12:45",
     thumbnail: "⚙️",
+    featured: true,
+    relatedSlugs: ["quick-setup-tutorial", "analytics-dashboard-overview"],
   },
   {
+    slug: "analytics-dashboard-overview",
     title: "Analytics Dashboard Overview",
     description: "Understanding your call metrics and performance insights.",
     duration: "8:20",
     thumbnail: "📊",
+    featured: false,
+    relatedSlugs: ["calendar-integration-walkthrough", "advanced-customization"],
   },
 ];
 
-const articles = [
+const articles: Article[] = [
   {
+    slug: "ai-receptionist-cost-analysis",
     title: "AI Receptionist vs Traditional: A Cost Analysis",
     description: "Comprehensive breakdown of costs and ROI when switching to AI.",
     category: "Analysis",
+    featured: true,
+    relatedSlugs: ["scaling-business-with-ai", "privacy-security-best-practices"],
   },
   {
+    slug: "healthcare-spotlight",
     title: "Industry Spotlight: Healthcare",
     description: "How medical practices are benefiting from AI receptionists.",
     category: "Case Study",
+    featured: false,
+    relatedSlugs: ["ai-receptionist-cost-analysis", "privacy-security-best-practices"],
   },
   {
+    slug: "privacy-security-best-practices",
     title: "Privacy & Security Best Practices",
     description: "Ensuring your customer data remains protected with AI systems.",
     category: "Security",
+    featured: true,
+    relatedSlugs: ["ai-receptionist-cost-analysis", "healthcare-spotlight"],
   },
   {
+    slug: "scaling-business-with-ai",
     title: "Scaling Your Business with AI",
     description: "Strategies for growing your business without increasing overhead.",
     category: "Growth",
+    featured: false,
+    relatedSlugs: ["ai-receptionist-cost-analysis", "healthcare-spotlight"],
   },
 ];
 
@@ -96,9 +161,15 @@ const categoryTabs: { id: CategoryFilter; label: string; icon: typeof BookOpen }
   { id: "articles", label: "Articles", icon: FileText },
 ];
 
+const ITEMS_PER_PAGE = 4;
+
 const Resources = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState<CategoryFilter>("all");
+  const [guidesPage, setGuidesPage] = useState(1);
+  const [videosPage, setVideosPage] = useState(1);
+  const [blogsPage, setBlogsPage] = useState(1);
+  const [articlesPage, setArticlesPage] = useState(1);
 
   const filteredContent = useMemo(() => {
     const query = searchQuery.toLowerCase().trim();
@@ -162,6 +233,59 @@ const Resources = () => {
     };
   }, [searchQuery, activeCategory]);
 
+  // Pagination helpers
+  const paginate = <T,>(items: T[], page: number) => {
+    const start = (page - 1) * ITEMS_PER_PAGE;
+    return items.slice(start, start + ITEMS_PER_PAGE);
+  };
+
+  const getTotalPages = (total: number) => Math.ceil(total / ITEMS_PER_PAGE);
+
+  const PaginationControls = ({ 
+    currentPage, 
+    totalPages, 
+    onPageChange 
+  }: { 
+    currentPage: number; 
+    totalPages: number; 
+    onPageChange: (page: number) => void;
+  }) => {
+    if (totalPages <= 1) return null;
+    
+    return (
+      <div className="flex items-center justify-center gap-2 mt-8">
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => onPageChange(currentPage - 1)}
+          disabled={currentPage === 1}
+          className="bg-card/50 border-border/50"
+        >
+          <ChevronLeft className="h-4 w-4" />
+        </Button>
+        <span className="text-sm text-muted-foreground px-4">
+          Page {currentPage} of {totalPages}
+        </span>
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => onPageChange(currentPage + 1)}
+          disabled={currentPage === totalPages}
+          className="bg-card/50 border-border/50"
+        >
+          <ChevronRight className="h-4 w-4" />
+        </Button>
+      </div>
+    );
+  };
+
+  const FeaturedBadge = () => (
+    <Badge className="bg-gradient-to-r from-amber-500/20 to-orange-500/20 text-amber-400 border-amber-500/30 flex items-center gap-1">
+      <Star className="h-3 w-3 fill-current" />
+      Featured
+    </Badge>
+  );
+
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
@@ -206,7 +330,13 @@ const Resources = () => {
                   key={tab.id}
                   variant={activeCategory === tab.id ? "default" : "outline"}
                   size="sm"
-                  onClick={() => setActiveCategory(tab.id)}
+                  onClick={() => {
+                    setActiveCategory(tab.id);
+                    setGuidesPage(1);
+                    setVideosPage(1);
+                    setBlogsPage(1);
+                    setArticlesPage(1);
+                  }}
                   className={`flex items-center gap-2 transition-all ${
                     activeCategory === tab.id 
                       ? "bg-primary text-primary-foreground" 
@@ -253,28 +383,37 @@ const Resources = () => {
               <Badge variant="outline" className="ml-2">{filteredContent.guides.length}</Badge>
             </div>
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {filteredContent.guides.map((guide, index) => (
-                <Card 
-                  key={index} 
-                  className="bg-card/50 border-border/50 hover:border-primary/50 transition-all duration-300 hover:-translate-y-1 cursor-pointer group animate-fade-in"
-                  style={{ animationDelay: `${index * 0.1}s` }}
-                >
-                  <CardHeader>
-                    <div className="flex items-center justify-between mb-2">
-                      <Badge variant="outline" className="text-xs">{guide.category}</Badge>
-                      <span className="text-xs text-muted-foreground flex items-center gap-1">
-                        <Clock className="h-3 w-3" />
-                        {guide.readTime}
-                      </span>
-                    </div>
-                    <CardTitle className="text-lg group-hover:text-primary transition-colors">{guide.title}</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <CardDescription>{guide.description}</CardDescription>
-                  </CardContent>
-                </Card>
+              {paginate(filteredContent.guides, guidesPage).map((guide, index) => (
+                <Link to={`/guide/${guide.slug}`} key={guide.slug}>
+                  <Card 
+                    className="bg-card/50 border-border/50 hover:border-primary/50 transition-all duration-300 hover:-translate-y-1 cursor-pointer group animate-fade-in h-full"
+                    style={{ animationDelay: `${index * 0.1}s` }}
+                  >
+                    <CardHeader>
+                      <div className="flex items-center justify-between mb-2 flex-wrap gap-2">
+                        <div className="flex items-center gap-2">
+                          <Badge variant="outline" className="text-xs">{guide.category}</Badge>
+                          {guide.featured && <FeaturedBadge />}
+                        </div>
+                        <span className="text-xs text-muted-foreground flex items-center gap-1">
+                          <Clock className="h-3 w-3" />
+                          {guide.readTime}
+                        </span>
+                      </div>
+                      <CardTitle className="text-lg group-hover:text-primary transition-colors">{guide.title}</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <CardDescription>{guide.description}</CardDescription>
+                    </CardContent>
+                  </Card>
+                </Link>
               ))}
             </div>
+            <PaginationControls 
+              currentPage={guidesPage} 
+              totalPages={getTotalPages(filteredContent.guides.length)} 
+              onPageChange={setGuidesPage} 
+            />
           </div>
         </section>
       )}
@@ -291,27 +430,38 @@ const Resources = () => {
               <Badge variant="outline" className="ml-2">{filteredContent.videoTutorials.length}</Badge>
             </div>
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {filteredContent.videoTutorials.map((video, index) => (
-                <Card 
-                  key={index} 
-                  className="bg-card/50 border-border/50 hover:border-accent/50 transition-all duration-300 hover:-translate-y-1 cursor-pointer group overflow-hidden animate-fade-in"
-                  style={{ animationDelay: `${index * 0.1}s` }}
-                >
-                  <div className="aspect-video bg-gradient-to-br from-accent/20 to-primary/20 flex items-center justify-center text-5xl relative">
-                    {video.thumbnail}
-                    <div className="absolute bottom-2 right-2 bg-background/80 px-2 py-1 rounded text-xs font-medium">
-                      {video.duration}
+              {paginate(filteredContent.videoTutorials, videosPage).map((video, index) => (
+                <Link to={`/video/${video.slug}`} key={video.slug}>
+                  <Card 
+                    className="bg-card/50 border-border/50 hover:border-accent/50 transition-all duration-300 hover:-translate-y-1 cursor-pointer group overflow-hidden animate-fade-in h-full"
+                    style={{ animationDelay: `${index * 0.1}s` }}
+                  >
+                    <div className="aspect-video bg-gradient-to-br from-accent/20 to-primary/20 flex items-center justify-center text-5xl relative">
+                      {video.thumbnail}
+                      <div className="absolute bottom-2 right-2 bg-background/80 px-2 py-1 rounded text-xs font-medium">
+                        {video.duration}
+                      </div>
+                      {video.featured && (
+                        <div className="absolute top-2 left-2">
+                          <FeaturedBadge />
+                        </div>
+                      )}
                     </div>
-                  </div>
-                  <CardHeader>
-                    <CardTitle className="text-lg group-hover:text-accent transition-colors">{video.title}</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <CardDescription>{video.description}</CardDescription>
-                  </CardContent>
-                </Card>
+                    <CardHeader>
+                      <CardTitle className="text-lg group-hover:text-accent transition-colors">{video.title}</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <CardDescription>{video.description}</CardDescription>
+                    </CardContent>
+                  </Card>
+                </Link>
               ))}
             </div>
+            <PaginationControls 
+              currentPage={videosPage} 
+              totalPages={getTotalPages(filteredContent.videoTutorials.length)} 
+              onPageChange={setVideosPage} 
+            />
           </div>
         </section>
       )}
@@ -328,16 +478,19 @@ const Resources = () => {
               <Badge variant="outline" className="ml-2">{filteredContent.blogs.length}</Badge>
             </div>
             <div className="grid md:grid-cols-3 gap-6">
-              {filteredContent.blogs.map((blog, index) => (
+              {paginate(filteredContent.blogs, blogsPage).map((blog, index) => (
                 <Card 
-                  key={index} 
+                  key={blog.slug} 
                   className="bg-card/50 border-border/50 hover:border-primary/50 transition-all duration-300 hover:-translate-y-1 cursor-pointer group animate-fade-in"
                   style={{ animationDelay: `${index * 0.1}s` }}
                 >
                   <CardHeader>
-                    <div className="flex items-center gap-2 text-xs text-muted-foreground mb-2">
-                      <Calendar className="h-3 w-3" />
-                      {blog.date} • {blog.author}
+                    <div className="flex items-center justify-between gap-2 text-xs text-muted-foreground mb-2">
+                      <div className="flex items-center gap-2">
+                        <Calendar className="h-3 w-3" />
+                        {blog.date} • {blog.author}
+                      </div>
+                      {blog.featured && <FeaturedBadge />}
                     </div>
                     <CardTitle className="text-xl group-hover:text-primary transition-colors">{blog.title}</CardTitle>
                   </CardHeader>
@@ -352,6 +505,11 @@ const Resources = () => {
                 </Card>
               ))}
             </div>
+            <PaginationControls 
+              currentPage={blogsPage} 
+              totalPages={getTotalPages(filteredContent.blogs.length)} 
+              onPageChange={setBlogsPage} 
+            />
           </div>
         </section>
       )}
@@ -368,22 +526,31 @@ const Resources = () => {
               <Badge variant="outline" className="ml-2">{filteredContent.articles.length}</Badge>
             </div>
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {filteredContent.articles.map((article, index) => (
-                <Card 
-                  key={index} 
-                  className="bg-card/50 border-border/50 hover:border-accent/50 transition-all duration-300 hover:-translate-y-1 cursor-pointer group animate-fade-in"
-                  style={{ animationDelay: `${index * 0.1}s` }}
-                >
-                  <CardHeader>
-                    <Badge className="w-fit mb-2 bg-accent/10 text-accent border-accent/20">{article.category}</Badge>
-                    <CardTitle className="text-lg group-hover:text-accent transition-colors">{article.title}</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <CardDescription>{article.description}</CardDescription>
-                  </CardContent>
-                </Card>
+              {paginate(filteredContent.articles, articlesPage).map((article, index) => (
+                <Link to={`/article/${article.slug}`} key={article.slug}>
+                  <Card 
+                    className="bg-card/50 border-border/50 hover:border-accent/50 transition-all duration-300 hover:-translate-y-1 cursor-pointer group animate-fade-in h-full"
+                    style={{ animationDelay: `${index * 0.1}s` }}
+                  >
+                    <CardHeader>
+                      <div className="flex items-center gap-2 mb-2 flex-wrap">
+                        <Badge className="bg-accent/10 text-accent border-accent/20">{article.category}</Badge>
+                        {article.featured && <FeaturedBadge />}
+                      </div>
+                      <CardTitle className="text-lg group-hover:text-accent transition-colors">{article.title}</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <CardDescription>{article.description}</CardDescription>
+                    </CardContent>
+                  </Card>
+                </Link>
               ))}
             </div>
+            <PaginationControls 
+              currentPage={articlesPage} 
+              totalPages={getTotalPages(filteredContent.articles.length)} 
+              onPageChange={setArticlesPage} 
+            />
           </div>
         </section>
       )}
@@ -391,9 +558,9 @@ const Resources = () => {
       {/* CTA Section */}
       <section className="py-20 px-4">
         <div className="container mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Can't find what you're looking for?</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">Can&apos;t find what you&apos;re looking for?</h2>
           <p className="text-muted-foreground mb-8 max-w-xl mx-auto">
-            Our team is here to help. Reach out and we'll get you the answers you need.
+            Our team is here to help. Reach out and we&apos;ll get you the answers you need.
           </p>
           <Button size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground">
             Contact Support

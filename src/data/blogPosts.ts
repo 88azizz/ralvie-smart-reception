@@ -7,6 +7,9 @@ export interface BlogPost {
   readTime: string;
   category: string;
   content: string;
+  featured?: boolean;
+  tags: string[];
+  relatedSlugs: string[];
 }
 
 export const blogPosts: BlogPost[] = [
@@ -18,6 +21,9 @@ export const blogPosts: BlogPost[] = [
     author: "Ralvie Team",
     readTime: "8 min read",
     category: "Industry Trends",
+    featured: true,
+    tags: ["AI", "Customer Service", "Automation"],
+    relatedSlugs: ["5-ways-ai-reduce-business-costs", "customer-experience-ai-era"],
     content: `
 ## The Evolution of Customer Service
 
@@ -77,6 +83,9 @@ The question is no longer whether to adopt AI for customer service, but how quic
     author: "Ralvie Team",
     readTime: "6 min read",
     category: "Business Strategy",
+    featured: true,
+    tags: ["Cost Reduction", "ROI", "Business"],
+    relatedSlugs: ["future-of-customer-service-ai-receptionists", "customer-experience-ai-era"],
     content: `
 ## Maximizing ROI with AI Technology
 
@@ -134,6 +143,9 @@ AI is no longer a futuristic concept—it's a practical tool for reducing costs 
     author: "Ralvie Team",
     readTime: "7 min read",
     category: "Customer Experience",
+    featured: false,
+    tags: ["Customer Experience", "Personalization", "AI"],
+    relatedSlugs: ["future-of-customer-service-ai-receptionists", "5-ways-ai-reduce-business-costs"],
     content: `
 ## Balancing Technology and Human Connection
 
@@ -190,8 +202,97 @@ The future belongs to businesses that view AI not as a replacement for human con
 The AI era doesn't mean the end of personal customer experiences. It means the beginning of a new paradigm where technology and humanity work together to deliver service that's both efficient and genuinely caring.
     `,
   },
+  {
+    slug: "ai-in-healthcare-reception",
+    title: "AI Receptionists in Healthcare: A Complete Guide",
+    description: "How medical practices are using AI to improve patient experience and reduce administrative burden.",
+    date: "Dec 10, 2024",
+    author: "Ralvie Team",
+    readTime: "9 min read",
+    category: "Healthcare",
+    featured: false,
+    tags: ["Healthcare", "Medical", "Patient Experience"],
+    relatedSlugs: ["future-of-customer-service-ai-receptionists", "customer-experience-ai-era"],
+    content: `
+## Transforming Healthcare Reception with AI
+
+The healthcare industry faces unique challenges when it comes to patient communication. AI receptionists are emerging as a powerful solution to improve patient experience while reducing administrative burden on medical staff.
+
+### The Healthcare Reception Challenge
+
+Medical practices deal with high call volumes, complex scheduling needs, and sensitive patient information. Traditional reception models often struggle to keep up, resulting in long hold times and frustrated patients.
+
+### How AI Addresses Healthcare Needs
+
+**Appointment Scheduling**
+
+AI can handle appointment booking 24/7, checking availability, confirming details, and sending automated reminders to reduce no-shows.
+
+**Patient Inquiries**
+
+Common questions about office hours, insurance acceptance, and preparation for appointments can be handled instantly without staff intervention.
+
+**Emergency Triage**
+
+AI can identify urgent situations and route them appropriately, ensuring critical cases receive immediate attention.
+
+### HIPAA Compliance
+
+Any AI solution in healthcare must be HIPAA compliant. Leading solutions encrypt all communications and maintain strict data protection protocols.
+
+### Conclusion
+
+AI receptionists offer healthcare practices a way to improve patient satisfaction while allowing staff to focus on in-person care. The result is a better experience for everyone involved.
+    `,
+  },
+  {
+    slug: "real-estate-ai-lead-qualification",
+    title: "AI Lead Qualification for Real Estate Agents",
+    description: "Never miss a lead again with AI-powered property inquiry handling.",
+    date: "Dec 5, 2024",
+    author: "Ralvie Team",
+    readTime: "6 min read",
+    category: "Real Estate",
+    featured: false,
+    tags: ["Real Estate", "Lead Generation", "Sales"],
+    relatedSlugs: ["5-ways-ai-reduce-business-costs", "future-of-customer-service-ai-receptionists"],
+    content: `
+## Capturing Every Real Estate Lead with AI
+
+In real estate, timing is everything. When a potential buyer calls about a property, every minute of delay can mean a lost sale. AI receptionists ensure you never miss an opportunity.
+
+### The Lead Qualification Process
+
+AI can gather essential information from callers:
+- Property preferences and budget
+- Timeline for purchase or sale
+- Pre-qualification status
+- Scheduling for property viewings
+
+### 24/7 Availability Matters
+
+Property inquiries come at all hours. AI ensures every call is answered professionally, whether it is 2 PM or 2 AM.
+
+### Integration with CRM
+
+Qualified leads are automatically added to your CRM with all relevant details, ready for follow-up by your team.
+
+### Conclusion
+
+Real estate professionals who implement AI reception report significant increases in lead capture and conversion rates. The technology pays for itself many times over.
+    `,
+  },
 ];
 
 export const getBlogPost = (slug: string): BlogPost | undefined => {
   return blogPosts.find((post) => post.slug === slug);
+};
+
+export const getRelatedPosts = (slug: string): BlogPost[] => {
+  const currentPost = getBlogPost(slug);
+  if (!currentPost) return [];
+  
+  return currentPost.relatedSlugs
+    .map(relatedSlug => getBlogPost(relatedSlug))
+    .filter((post): post is BlogPost => post !== undefined);
 };

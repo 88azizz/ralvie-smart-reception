@@ -4,17 +4,23 @@ import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Calendar, Clock, User } from "lucide-react";
-import { getBlogPost, BlogPost as BlogPostType } from "@/data/blogPosts";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { ArrowLeft, ArrowRight, Calendar, Clock, User, Tag } from "lucide-react";
+import { getBlogPost, getRelatedPosts, BlogPost as BlogPostType } from "@/data/blogPosts";
 
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
   const [post, setPost] = useState<BlogPostType | undefined>();
+  const [relatedPosts, setRelatedPosts] = useState<BlogPostType[]>([]);
   const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
     if (slug) {
-      setPost(getBlogPost(slug));
+      const foundPost = getBlogPost(slug);
+      setPost(foundPost);
+      if (foundPost) {
+        setRelatedPosts(getRelatedPosts(slug));
+      }
     }
   }, [slug]);
 
@@ -95,6 +101,18 @@ const BlogPost = () => {
               {post.readTime}
             </div>
           </div>
+
+          {/* Tags */}
+          {post.tags && post.tags.length > 0 && (
+            <div className="flex flex-wrap items-center gap-2 mt-6 animate-fade-in" style={{ animationDelay: "0.35s" }}>
+              <Tag className="h-4 w-4 text-muted-foreground" />
+              {post.tags.map((tag) => (
+                <Badge key={tag} variant="outline" className="text-xs">
+                  {tag}
+                </Badge>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
@@ -162,6 +180,66 @@ const BlogPost = () => {
           </div>
         </div>
       </article>
+
+      {/* Related Posts Section */}
+      {relatedPosts.length > 0 && (
+        <section className="py-16 px-4 bg-muted/30">
+          <div className="container mx-auto max-w-4xl">
+            <h2 className="text-2xl md:text-3xl font-bold mb-8">Related Articles</h2>
+            <div className="grid md:grid-cols-2 gap-6">
+              {relatedPosts.map((relatedPost, index) => (
+                <Card 
+                  key={relatedPost.slug}
+                  className="bg-card/50 border-border/50 hover:border-primary/50 transition-all duration-300 hover:-translate-y-1 cursor-pointer group animate-fade-in"
+                  style={{ animationDelay: `${index * 0.1}s` }}
+                >
+                  <CardHeader>
+                    <div className="flex items-center gap-2 text-xs text-muted-foreground mb-2">
+                      <Calendar className="h-3 w-3" />
+                      {relatedPost.date} • {relatedPost.readTime}
+                    </div>
+                    <CardTitle className="text-lg group-hover:text-primary transition-colors">
+                      {relatedPost.title}
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <CardDescription className="mb-4">{relatedPost.description}</CardDescription>
+                    <Button variant="ghost" size="sm" className="group/btn" asChild>
+                      <Link to={`/blog/${relatedPost.slug}`}>
+                        Read Article <ArrowRight className="h-4 w-4 ml-1 group-hover/btn:translate-x-1 transition-transform" />
+                      </Link>
+                    </Button>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Internal Links for SEO */}
+      <section className="py-12 px-4">
+        <div className="container mx-auto max-w-4xl">
+          <h3 className="text-xl font-semibold mb-6">Explore More</h3>
+          <div className="flex flex-wrap gap-3">
+            <Button variant="outline" size="sm" asChild className="border-border/50 hover:border-primary/50">
+              <Link to="/case-studies/healthcare">Healthcare Case Study</Link>
+            </Button>
+            <Button variant="outline" size="sm" asChild className="border-border/50 hover:border-primary/50">
+              <Link to="/case-studies/hospitality">Hospitality Case Study</Link>
+            </Button>
+            <Button variant="outline" size="sm" asChild className="border-border/50 hover:border-primary/50">
+              <Link to="/case-studies/real-estate">Real Estate Case Study</Link>
+            </Button>
+            <Button variant="outline" size="sm" asChild className="border-border/50 hover:border-primary/50">
+              <Link to="/pricing">View Pricing</Link>
+            </Button>
+            <Button variant="outline" size="sm" asChild className="border-border/50 hover:border-primary/50">
+              <Link to="/integrations">See Integrations</Link>
+            </Button>
+          </div>
+        </div>
+      </section>
 
       {/* CTA Section */}
       <section className="py-16 px-4 bg-muted/30">
