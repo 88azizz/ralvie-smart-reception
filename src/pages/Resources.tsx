@@ -5,7 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { BookOpen, Video, FileText, Newspaper, ArrowRight, Clock, Calendar, Search, X, Star, ChevronLeft, ChevronRight } from "lucide-react";
+import { BookOpen, Video, FileText, Newspaper, ArrowRight, Clock, Calendar, Search, X, Star, ChevronLeft, ChevronRight, Mail } from "lucide-react";
 import { Link } from "react-router-dom";
 import { blogPosts } from "@/data/blogPosts";
 
@@ -280,7 +280,7 @@ const Resources = () => {
   };
 
   const FeaturedBadge = () => (
-    <Badge className="bg-gradient-to-r from-amber-500/20 to-orange-500/20 text-amber-400 border-amber-500/30 flex items-center gap-1">
+    <Badge className="bg-gradient-to-r from-cyan-500/20 to-teal-500/20 text-cyan-300 border-cyan-500/30 flex items-center gap-1">
       <Star className="h-3 w-3 fill-current" />
       Featured
     </Badge>
@@ -481,21 +481,30 @@ const Resources = () => {
               {paginate(filteredContent.blogs, blogsPage).map((blog, index) => (
                 <Card 
                   key={blog.slug} 
-                  className="bg-card/50 border-border/50 hover:border-primary/50 transition-all duration-300 hover:-translate-y-1 cursor-pointer group animate-fade-in"
+                  className="bg-card/50 border-border/50 hover:border-primary/50 transition-all duration-300 hover:-translate-y-1 cursor-pointer group animate-fade-in overflow-hidden"
                   style={{ animationDelay: `${index * 0.1}s` }}
                 >
-                  <CardHeader>
-                    <div className="flex items-center justify-between gap-2 text-xs text-muted-foreground mb-2">
-                      <div className="flex items-center gap-2">
-                        <Calendar className="h-3 w-3" />
-                        {blog.date} • {blog.author}
+                  <div className="relative h-48 overflow-hidden">
+                    <img 
+                      src={blog.image} 
+                      alt={blog.title}
+                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                    />
+                    {blog.featured && (
+                      <div className="absolute top-3 right-3">
+                        <FeaturedBadge />
                       </div>
-                      {blog.featured && <FeaturedBadge />}
+                    )}
+                  </div>
+                  <CardHeader className="pt-4">
+                    <div className="flex items-center gap-2 text-xs text-muted-foreground mb-2">
+                      <Calendar className="h-3 w-3" />
+                      {blog.date} • {blog.author}
                     </div>
-                    <CardTitle className="text-xl group-hover:text-primary transition-colors">{blog.title}</CardTitle>
+                    <CardTitle className="text-xl group-hover:text-primary transition-colors line-clamp-2">{blog.title}</CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <CardDescription className="mb-4">{blog.description}</CardDescription>
+                    <CardDescription className="mb-4 line-clamp-2">{blog.description}</CardDescription>
                     <Button variant="ghost" size="sm" className="group/btn" asChild>
                       <Link to={`/blog/${blog.slug}`}>
                         Read More <ArrowRight className="h-4 w-4 ml-1 group-hover/btn:translate-x-1 transition-transform" />
@@ -554,6 +563,37 @@ const Resources = () => {
           </div>
         </section>
       )}
+
+      {/* Newsletter Section */}
+      <section className="py-16 px-4">
+        <div className="container mx-auto max-w-2xl">
+          <Card className="bg-gradient-to-br from-primary/10 via-card/50 to-accent/10 border-primary/20">
+            <CardContent className="p-8 text-center">
+              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/20 mb-6">
+                <Mail className="h-8 w-8 text-primary" />
+              </div>
+              <h2 className="text-2xl md:text-3xl font-bold mb-3">Stay Updated</h2>
+              <p className="text-muted-foreground mb-6 max-w-lg mx-auto">
+                Get the latest AI insights, product updates, and industry tips delivered straight to your inbox.
+              </p>
+              <form className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto" onSubmit={(e) => e.preventDefault()}>
+                <Input 
+                  type="email" 
+                  placeholder="Enter your email" 
+                  className="flex-1 bg-background/50 border-border/50 focus:border-primary/50"
+                  required
+                />
+                <Button type="submit" className="bg-primary hover:bg-primary/90 text-primary-foreground whitespace-nowrap">
+                  Subscribe
+                </Button>
+              </form>
+              <p className="text-xs text-muted-foreground mt-4">
+                No spam. Unsubscribe anytime.
+              </p>
+            </CardContent>
+          </Card>
+        </div>
+      </section>
 
       {/* CTA Section */}
       <section className="py-20 px-4">
