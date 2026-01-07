@@ -10,6 +10,7 @@ export interface BlogPost {
   featured?: boolean;
   tags: string[];
   relatedSlugs: string[];
+  image: string;
 }
 
 export const blogPosts: BlogPost[] = [
@@ -24,6 +25,7 @@ export const blogPosts: BlogPost[] = [
     featured: true,
     tags: ["AI", "Customer Service", "Automation"],
     relatedSlugs: ["5-ways-ai-reduce-business-costs", "customer-experience-ai-era"],
+    image: "https://images.unsplash.com/photo-1531746790731-6c087fecd65a?w=600&h=400&fit=crop",
     content: `
 ## The Evolution of Customer Service
 
@@ -86,6 +88,7 @@ The question is no longer whether to adopt AI for customer service, but how quic
     featured: true,
     tags: ["Cost Reduction", "ROI", "Business"],
     relatedSlugs: ["future-of-customer-service-ai-receptionists", "customer-experience-ai-era"],
+    image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&h=400&fit=crop",
     content: `
 ## Maximizing ROI with AI Technology
 
@@ -146,6 +149,7 @@ AI is no longer a futuristic concept—it's a practical tool for reducing costs 
     featured: false,
     tags: ["Customer Experience", "Personalization", "AI"],
     relatedSlugs: ["future-of-customer-service-ai-receptionists", "5-ways-ai-reduce-business-costs"],
+    image: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop",
     content: `
 ## Balancing Technology and Human Connection
 
@@ -213,6 +217,7 @@ The AI era doesn't mean the end of personal customer experiences. It means the b
     featured: false,
     tags: ["Healthcare", "Medical", "Patient Experience"],
     relatedSlugs: ["future-of-customer-service-ai-receptionists", "customer-experience-ai-era"],
+    image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=600&h=400&fit=crop",
     content: `
 ## Transforming Healthcare Reception with AI
 
@@ -256,6 +261,7 @@ AI receptionists offer healthcare practices a way to improve patient satisfactio
     featured: false,
     tags: ["Real Estate", "Lead Generation", "Sales"],
     relatedSlugs: ["5-ways-ai-reduce-business-costs", "future-of-customer-service-ai-receptionists"],
+    image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&h=400&fit=crop",
     content: `
 ## Capturing Every Real Estate Lead with AI
 
