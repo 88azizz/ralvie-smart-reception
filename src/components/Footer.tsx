@@ -1,43 +1,20 @@
-import { Phone, Mail, MapPin } from "lucide-react";
+import { Mail, MapPin } from "lucide-react";
+import { Link } from "react-router-dom";
 import ralvieLogo from "@/assets/ralvie-logo-white.png";
 
 export const Footer = () => {
   return (
     <footer className="border-t border-border bg-card/50">
       <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-8 mb-8">
           {/* Brand */}
-          <div>
+          <div className="md:col-span-2">
             <div className="mb-4">
               <img src={ralvieLogo} alt="Ralvie AI" className="h-10" />
             </div>
-            <p className="text-muted-foreground text-sm">
+            <p className="text-muted-foreground text-sm mb-4">
               AI-powered frontdesk that speaks like a human, works like AI.
             </p>
-          </div>
-
-          {/* Product */}
-          <div>
-            <h3 className="font-semibold text-foreground mb-4">Product</h3>
-            <ul className="space-y-2 text-sm text-muted-foreground">
-              <li><a href="/#features" className="hover:text-primary transition-colors">Features</a></li>
-              <li><a href="/#pricing" className="hover:text-primary transition-colors">Pricing</a></li>
-              <li><a href="/#integrations" className="hover:text-primary transition-colors">Integrations</a></li>
-            </ul>
-          </div>
-
-          {/* Company */}
-          <div>
-            <h3 className="font-semibold text-foreground mb-4">Company</h3>
-            <ul className="space-y-2 text-sm text-muted-foreground">
-              <li><a href="https://ralvie.ai/blog/" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">Blog</a></li>
-              <li><a href="https://ralvie.ai/contact-support/" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">Contact</a></li>
-            </ul>
-          </div>
-
-          {/* Contact */}
-          <div>
-            <h3 className="font-semibold text-foreground mb-4">Contact</h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li className="flex items-start gap-2">
                 <Mail className="w-4 h-4 mt-1 flex-shrink-0" />
@@ -47,6 +24,39 @@ export const Footer = () => {
                 <MapPin className="w-4 h-4 mt-1 flex-shrink-0" />
                 <span>Ralvie AI Inc, 120 East Beaver Creek Rd Suite 200, Richmond Hill, ON L4B 4V1, Canada</span>
               </li>
+            </ul>
+          </div>
+
+          {/* Product */}
+          <div>
+            <h3 className="font-semibold text-foreground mb-4">Product</h3>
+            <ul className="space-y-2 text-sm text-muted-foreground">
+              <li><a href="/#features" className="hover:text-primary transition-colors">Features</a></li>
+              <li><Link to="/pricing" className="hover:text-primary transition-colors">Pricing</Link></li>
+              <li><Link to="/integrations" className="hover:text-primary transition-colors">Integrations</Link></li>
+              <li><a href="/#demo" className="hover:text-primary transition-colors">Demo</a></li>
+            </ul>
+          </div>
+
+          {/* Industries */}
+          <div>
+            <h3 className="font-semibold text-foreground mb-4">Industries</h3>
+            <ul className="space-y-2 text-sm text-muted-foreground">
+              <li><Link to="/case-studies/hospitality" className="hover:text-primary transition-colors">Hospitality</Link></li>
+              <li><Link to="/case-studies/healthcare" className="hover:text-primary transition-colors">Healthcare</Link></li>
+              <li><Link to="/case-studies/real-estate" className="hover:text-primary transition-colors">Real Estate</Link></li>
+              <li><Link to="/case-studies/education" className="hover:text-primary transition-colors">Education</Link></li>
+            </ul>
+          </div>
+
+          {/* Resources & Company */}
+          <div>
+            <h3 className="font-semibold text-foreground mb-4">Resources</h3>
+            <ul className="space-y-2 text-sm text-muted-foreground">
+              <li><Link to="/resources" className="hover:text-primary transition-colors">Resource Hub</Link></li>
+              <li><a href="https://ralvie.ai/blog/" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">Blog</a></li>
+              <li><a href="https://ralvie.ai/contact-support/" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">Contact</a></li>
+              <li><a href="/#faq" className="hover:text-primary transition-colors">FAQ</a></li>
             </ul>
           </div>
         </div>
