@@ -13,6 +13,9 @@ import Resources from "./pages/Resources";
 import PricingPage from "./pages/PricingPage";
 import IntegrationsPage from "./pages/IntegrationsPage";
 import BlogPost from "./pages/BlogPost";
+import AIVoice from "./pages/features/AIVoice";
+import Scheduling from "./pages/features/Scheduling";
+import Analytics from "./pages/features/Analytics";
 
 const queryClient = new QueryClient();
 
@@ -28,6 +31,9 @@ const App = () => (
           <Route path="/blog/:slug" element={<BlogPost />} />
           <Route path="/pricing" element={<PricingPage />} />
           <Route path="/integrations" element={<IntegrationsPage />} />
+          <Route path="/features/ai-voice" element={<AIVoice />} />
+          <Route path="/features/scheduling" element={<Scheduling />} />
+          <Route path="/features/analytics" element={<Analytics />} />
           <Route path="/case-studies/hospitality" element={<HospitalityCaseStudy />} />
           <Route path="/case-studies/healthcare" element={<HealthcareCaseStudy />} />
           <Route path="/case-studies/real-estate" element={<RealEstateCaseStudy />} />

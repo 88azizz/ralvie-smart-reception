@@ -17,6 +17,7 @@ interface Guide {
   category: string;
   featured?: boolean;
   relatedSlugs: string[];
+  image: string;
 }
 
 interface VideoTutorial {
@@ -36,6 +37,7 @@ interface Article {
   category: string;
   featured?: boolean;
   relatedSlugs: string[];
+  image: string;
 }
 
 const guides: Guide[] = [
@@ -47,6 +49,7 @@ const guides: Guide[] = [
     category: "Beginner",
     featured: true,
     relatedSlugs: ["customizing-ai-voice", "integration-best-practices"],
+    image: "https://images.unsplash.com/photo-1551434678-e076c223a692?w=600&h=400&fit=crop",
   },
   {
     slug: "customizing-ai-voice",
@@ -56,6 +59,7 @@ const guides: Guide[] = [
     category: "Intermediate",
     featured: false,
     relatedSlugs: ["getting-started-ralvie-ai", "optimizing-call-handling"],
+    image: "https://images.unsplash.com/photo-1589254065878-42c9da997008?w=600&h=400&fit=crop",
   },
   {
     slug: "integration-best-practices",
@@ -65,6 +69,7 @@ const guides: Guide[] = [
     category: "Advanced",
     featured: true,
     relatedSlugs: ["getting-started-ralvie-ai", "optimizing-call-handling"],
+    image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600&h=400&fit=crop",
   },
   {
     slug: "optimizing-call-handling",
@@ -74,6 +79,7 @@ const guides: Guide[] = [
     category: "Intermediate",
     featured: false,
     relatedSlugs: ["customizing-ai-voice", "integration-best-practices"],
+    image: "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=600&h=400&fit=crop",
   },
 ];
 
@@ -124,6 +130,7 @@ const articles: Article[] = [
     category: "Analysis",
     featured: true,
     relatedSlugs: ["scaling-business-with-ai", "privacy-security-best-practices"],
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop",
   },
   {
     slug: "healthcare-spotlight",
@@ -132,6 +139,7 @@ const articles: Article[] = [
     category: "Case Study",
     featured: false,
     relatedSlugs: ["ai-receptionist-cost-analysis", "privacy-security-best-practices"],
+    image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&h=400&fit=crop",
   },
   {
     slug: "privacy-security-best-practices",
@@ -140,6 +148,7 @@ const articles: Article[] = [
     category: "Security",
     featured: true,
     relatedSlugs: ["ai-receptionist-cost-analysis", "healthcare-spotlight"],
+    image: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=600&h=400&fit=crop",
   },
   {
     slug: "scaling-business-with-ai",
@@ -148,6 +157,7 @@ const articles: Article[] = [
     category: "Growth",
     featured: false,
     relatedSlugs: ["ai-receptionist-cost-analysis", "healthcare-spotlight"],
+    image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&h=400&fit=crop",
   },
 ];
 
@@ -386,15 +396,24 @@ const Resources = () => {
               {paginate(filteredContent.guides, guidesPage).map((guide, index) => (
                 <Link to={`/guide/${guide.slug}`} key={guide.slug}>
                   <Card 
-                    className="bg-card/50 border-border/50 hover:border-primary/50 transition-all duration-300 hover:-translate-y-1 cursor-pointer group animate-fade-in h-full"
+                    className="bg-card/50 border-border/50 hover:border-primary/50 transition-all duration-300 hover:-translate-y-1 cursor-pointer group animate-fade-in h-full overflow-hidden"
                     style={{ animationDelay: `${index * 0.1}s` }}
                   >
-                    <CardHeader>
-                      <div className="flex items-center justify-between mb-2 flex-wrap gap-2">
-                        <div className="flex items-center gap-2">
-                          <Badge variant="outline" className="text-xs">{guide.category}</Badge>
-                          {guide.featured && <FeaturedBadge />}
+                    <div className="relative h-40 overflow-hidden">
+                      <img 
+                        src={guide.image} 
+                        alt={guide.title}
+                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                      />
+                      {guide.featured && (
+                        <div className="absolute top-3 right-3">
+                          <FeaturedBadge />
                         </div>
+                      )}
+                    </div>
+                    <CardHeader className="pt-4">
+                      <div className="flex items-center justify-between mb-2 flex-wrap gap-2">
+                        <Badge variant="outline" className="text-xs">{guide.category}</Badge>
                         <span className="text-xs text-muted-foreground flex items-center gap-1">
                           <Clock className="h-3 w-3" />
                           {guide.readTime}
@@ -538,14 +557,23 @@ const Resources = () => {
               {paginate(filteredContent.articles, articlesPage).map((article, index) => (
                 <Link to={`/article/${article.slug}`} key={article.slug}>
                   <Card 
-                    className="bg-card/50 border-border/50 hover:border-accent/50 transition-all duration-300 hover:-translate-y-1 cursor-pointer group animate-fade-in h-full"
+                    className="bg-card/50 border-border/50 hover:border-accent/50 transition-all duration-300 hover:-translate-y-1 cursor-pointer group animate-fade-in h-full overflow-hidden"
                     style={{ animationDelay: `${index * 0.1}s` }}
                   >
-                    <CardHeader>
-                      <div className="flex items-center gap-2 mb-2 flex-wrap">
-                        <Badge className="bg-accent/10 text-accent border-accent/20">{article.category}</Badge>
-                        {article.featured && <FeaturedBadge />}
-                      </div>
+                    <div className="relative h-40 overflow-hidden">
+                      <img 
+                        src={article.image} 
+                        alt={article.title}
+                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                      />
+                      {article.featured && (
+                        <div className="absolute top-3 right-3">
+                          <FeaturedBadge />
+                        </div>
+                      )}
+                    </div>
+                    <CardHeader className="pt-4">
+                      <Badge className="bg-accent/10 text-accent border-accent/20 w-fit mb-2">{article.category}</Badge>
                       <CardTitle className="text-lg group-hover:text-accent transition-colors">{article.title}</CardTitle>
                     </CardHeader>
                     <CardContent>
